@@ -18,6 +18,7 @@ class JednostkaOrganizacyjna(models.Model):
         verbose_name = "Jednostka Organizacyjna"
         verbose_name_plural = "Jednostki Organizacyjne"
 
+
 class Uzytkownik(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     login = models.CharField(max_length=120, unique=True, verbose_name="Login")
@@ -34,6 +35,7 @@ class Uzytkownik(models.Model):
     class Meta:
         verbose_name =  "Użytkownik"
         verbose_name_plural = "Użytkownicy"
+
 
 class SesjaUzytkownika(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
