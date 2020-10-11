@@ -1,0 +1,20 @@
+{% extends 'pytanka/base.html' %}
+
+{% block title %}
+Odpowiedzi
+{% endblock %}
+
+{% block content %}
+<h1>Odpowiedzi Page</h1>
+{% if lista_odp %}
+    <ul>
+        {% for odpowiedzianki in lista_odp %}
+        <li>
+            <em>{{odpowiedzianki}}</em>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+   <p>Brak !!!</p>
+{% endif %}
+{% endblock %}

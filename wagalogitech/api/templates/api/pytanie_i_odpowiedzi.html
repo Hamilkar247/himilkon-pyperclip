@@ -1,0 +1,19 @@
+{% extends 'pytanka/base.html' %}
+
+{% block title %}
+Pytanie i Odpowiedzi
+{% endblock %}
+
+{%block content %}
+<h1>Pytania i Odpowiedzi Page</h1>
+{% if tresc_pyt %}
+    <em>{{tresc_pyt}}</em>
+        {% for odpowiedzianko in lista_odp %}
+        <ul>
+            {{odpowiedzianko}}
+        </ul>
+        {% endfor %}
+{% else %}
+    <p>Brak !!!</p>
+{% endif %}
+{% endblock %}

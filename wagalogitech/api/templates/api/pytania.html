@@ -1,0 +1,21 @@
+{% extends 'pytanka/base.html' %}
+
+{% block title %}
+Pytania
+{% endblock %}
+
+{% block content %}
+<h1>Pytania Page</h1>
+{% if lista_pyt %}
+    <ul>
+        {% for pytanko in lista_pyt %}
+        <li>
+            <em>{{pytanko}}</em>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+   <p>Brak !!!</p>
+{% endif %}
+{% endblock %}
+

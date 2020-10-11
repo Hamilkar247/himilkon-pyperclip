@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>{% block title %}Kusys Kingdom Pytanka{% endblock %}</title>
+    </head>
+    <body>
+        <button onclick="window.location.reload();">Przeładuj "pytanka"!</button>
+        <br><br>
+        <em>Polskę luterańską racz nam wrócić Panie !</em>
+        <ul>
+            <li>Cieszyn</li>
+            <li>Mazury</li>
+        </ul>
+        <div id="content" name="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

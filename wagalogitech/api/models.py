@@ -7,7 +7,7 @@ import uuid
 
 
 class JednostkaOrganizacyjna(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nazwa = models.CharField(max_length=200, verbose_name="Nazwa")
     opis = models.CharField(max_length=500, verbose_name="Opis")
 
@@ -20,7 +20,7 @@ class JednostkaOrganizacyjna(models.Model):
 
 
 class Uzytkownik(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     login = models.CharField(max_length=120, unique=True, verbose_name="Login")
     haslo = models.CharField(max_length=120, unique=True, verbose_name="Haslo")
     isSuperuser = models.BooleanField()
@@ -38,7 +38,7 @@ class Uzytkownik(models.Model):
 
 
 class SesjaUzytkownika(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
     # pomiar = models.ForeignKey(Pomiar, on_delete=models.CASCADE)
     uzytkownik = models.ForeignKey(Uzytkownik, on_delete=models.CASCADE)
 
@@ -48,7 +48,7 @@ class SesjaUzytkownika(models.Model):
 
 
 class LogAdministracyjny(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     opis = models.CharField(max_length=500, verbose_name="Opis")
     data = models.DateField(blank=False, verbose_name="Data")
     czynnosc = models.CharField(max_length=200, verbose_name="Czynność")
@@ -62,7 +62,7 @@ class LogAdministracyjny(models.Model):
 
 
 class SeriaPomiarowa(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nazwa_sesji = models.CharField(max_length=100, verbose_name="nazwa sesji")
     #jednostka_organizacyjna = models.ForeignKey(JednostkaOrganizacyjna, on_delete=models.CASCADE)
 
@@ -72,7 +72,7 @@ class SeriaPomiarowa(models.Model):
 
 
 class Pomiar(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     czyWazny = models.BooleanField(verbose_name="Czy ważny?")
     wartosc = models.CharField(max_length=300, verbose_name="wartość")
     data_pomiaru = models.DateField(blank=False, verbose_name="data pomiaru")
@@ -84,7 +84,7 @@ class Pomiar(models.Model):
 
 
 class LogPomiarowy(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     opis = models.CharField(max_length=500)
     data = models.DateField()
     pomiar = models.ForeignKey(Pomiar, on_delete=models.CASCADE)
