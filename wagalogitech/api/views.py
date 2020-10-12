@@ -1,29 +1,33 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 from rest_framework import status, generics
 from rest_framework import authtoken
+from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from . import serializers
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
 from .models import (
 
     JednostkaOrganizacyjna,
     Uzytkownik,
-
+    Pomiar,
 )
 from .serializers import (
 
     JednostkaOrganizacyjnaSerializer,
-    UzytkownikSerializer
+    UzytkownikSerializer, PomiarSerializer
 
 )
 
-
-class JednostkaOrganizacyjna(generics.ListAPIView):
-    queryset = JednostkaOrganizacyjna.objects.all()
+class jednostka(generics.ListAPIView):
+    queryset = JednostkaOrganizacyjna.objects.all()#filter(id=1)
     serializer_class = JednostkaOrganizacyjnaSerializer
 
     # def get(self, request):
@@ -39,9 +43,40 @@ class JednostkaOrganizacyjna(generics.ListAPIView):
     #    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+#class JednostkaOrganizacyjnaPojedynczy(generics.ListAPIView, id_jednostki):
+#   queryset = JednostkaOrganizacyjna.objects.filter(id=id_jednostki)
+#   serializer_class = JednostkaOrganizacyjnaSerializer
+
+#========https://www.django-rest-framework.org/tutorial/1-serialization/#writing-regular-django-views-using-our-serializer
+@csrf_exempt
+def jedorg_list(request):
+    '''List all jednostek organizacyjnych'''
+    if request.method == 'GET':
+        jednostka = JednostkaOrganizacyjna.objects.all()
+        serializer = JednostkaOrganizacyjnaSerializer(jednostka, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = JednostkaOrganizacyjnaSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+#@csrf_exempt
+##def jednostka_detail(request, id_jednostki):
+#    """
+#    Retrieve, update or delete a code snippet
+#    """
+#    try:
+#        snippet = JednostkaOrganizacyjna.objects.get(id=pk)
+
+#=======================
+
 class Uzytkownik(APIView):
-    # queryset = Uzytkownik.objects.all()
-    # serializer_class = UzytkownikSerializer
+    queryset = Uzytkownik.objects.all()
+    serializer_class = UzytkownikSerializer
+
     # """
     # do uzupelnienia
     # """
@@ -71,13 +106,66 @@ class Uzytkownik(APIView):
 #        return Response(serializer.data)
 
 
-def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
-    try:
-        jednostka = JednostkaOrganizacyjna.objects.filter(id=jednostkaOrganizacyjna_id)
-        if not jednostka:
-            print("nie ma jednostki o tej nazwie !")
-    except ObjectDoesNotExist:
-        return HttpResponse("Nie ma jednostki o tym id!")
+# def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
+# try:
+# jednostka = JednostkaOrganizacyjna.objects.filter(id=jednostkaOrganizacyjna_id)
+# if not jednostka:
+#     print("nie ma jednostki o tej nazwie !")
+# except ObjectDoesNotExist:
+#   return HttpResponse("Nie ma jednostki o tym id!")
 
-    #return HttpResponse("nazwa jednostki to:" + nazwa_jednostki)
-    return render(request, "api/")
+# return HttpResponse("nazwa jednostki to:" + nazwa_jednostki)
+#    return render(request, "api/jednostkaOrganizacyjna.html")
+
+def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
+    queryset = JednostkaOrganizacyjna.objects.all()
+    serializer_class = JednostkaOrganizacyjnaSerializer
+    # print(jed_org)
+    return HttpResponse("witam:" + str(jednostkaOrganizacyjna_id))
+
+#================ https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
+
+@csrf_exempt
+def pomiar_list(request):
+    """ List all pomiar, or create a new snippet"""
+    if request.method == 'GET':
+        pomiar = Pomiar.objects.all()
+        serializer = PomiarSerializer(pomiar, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = PomiarSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+@csrf_exempt
+def pomiar_detail(request, pk):
+    '''
+    Retrieve, update or delete a code snippet
+    :param request:
+    :param pk:
+    :return:
+    '''
+    try:
+        pomiar = Pomiar.objects.get(pk=pk)
+    except Pomiar.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = PomiarSerializer(pomiar)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = PomiarSerializer(pomiar, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        pomiar.delete()
+        return HttpResponse(status=204)

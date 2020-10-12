@@ -1,0 +1,30 @@
+#####33# tutek 1 https://www.django-rest-framework.org/tutorial/1-serialization/#writing-regular-django-views-using-our-serializer
+from api.models import Pomiar
+from api.serializers import PomiarSerializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+import datetime
+pomiar = Pomiar(czyWazny=True, wartosc='1234', data_pomiaru=datetime.datetime.now())
+pomiar.save()
+serializer = PomiarSerializer(pomiar)
+serializer.data
+content = JSONRenderer().render(serializer.data)
+
+#deserialization
+import io
+stream = io.BytesIO(content)
+data = JSONParser().parse(stream)
+
+serializer = PomiarSerializer(data=data)
+serializer.is_valid()
+#True
+serializer.validated_data
+serializer.save()
+
+serializer = PomiarSerializer(Pomiar.objects.all(), many = True)
+serializer.data
+
+#Using modelserializers
+from api.serializers import PomiarSerializer
+serializer = PomiarSerializer
+print(repr(serializer))
