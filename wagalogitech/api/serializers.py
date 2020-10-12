@@ -3,7 +3,7 @@ from datetime import timezone
 from rest_framework import serializers
 from .models import (
     JednostkaOrganizacyjna,
-    Uzytkownik, Pomiar, SesjaUzytkownika,
+    Uzytkownik, Pomiar, SesjaUzytkownika, LogPomiarowy,
 )
 
 
@@ -21,8 +21,7 @@ class UzytkownikSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-
-#class PomiarSerializer(serializers.ModelSerializer):
+# class PomiarSerializer(serializers.ModelSerializer):
 #    id = serializers.IntegerField(read_only=True)
 #    czyWazny = serializers.BooleanField()
 #    wartosc = serializers.CharField(max_length=300)
@@ -54,13 +53,20 @@ class UzytkownikSerializer(serializers.ModelSerializer):
 #        model = Pomiar
 #        fields = "__all__"
 
-#================ https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
+# ================ https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
 class PomiarSerializer(serializers.ModelSerializer):
     """
     An automatically determined set of fields.
     Simple default implementations for the create() and update() methods.
     """
+
     class Meta:
         model = Pomiar
         fields = "__all__"
-        #field = ['id', 'czyWazny', 'wartosc', 'data_pomiaru'] #niestety bledogenny zapis
+        # field = ['id', 'czyWazny', 'wartosc', 'data_pomiaru'] #niestety bledogenny zapis
+
+
+class LogPomiarowySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LogPomiarowy
+        fields = "__all__"

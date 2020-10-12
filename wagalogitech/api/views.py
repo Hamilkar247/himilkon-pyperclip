@@ -17,17 +17,18 @@ from .models import (
 
     JednostkaOrganizacyjna,
     Uzytkownik,
-    Pomiar,
+    Pomiar, LogPomiarowy,
 )
 from .serializers import (
 
     JednostkaOrganizacyjnaSerializer,
-    UzytkownikSerializer, PomiarSerializer
+    UzytkownikSerializer, PomiarSerializer, LogPomiarowySerializer
 
 )
 
+
 class jednostka(generics.ListAPIView):
-    queryset = JednostkaOrganizacyjna.objects.all()#filter(id=1)
+    queryset = JednostkaOrganizacyjna.objects.all()  # filter(id=1)
     serializer_class = JednostkaOrganizacyjnaSerializer
 
     # def get(self, request):
@@ -43,11 +44,11 @@ class jednostka(generics.ListAPIView):
     #    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#class JednostkaOrganizacyjnaPojedynczy(generics.ListAPIView, id_jednostki):
+# class JednostkaOrganizacyjnaPojedynczy(generics.ListAPIView, id_jednostki):
 #   queryset = JednostkaOrganizacyjna.objects.filter(id=id_jednostki)
 #   serializer_class = JednostkaOrganizacyjnaSerializer
 
-#========https://www.django-rest-framework.org/tutorial/1-serialization/#writing-regular-django-views-using-our-serializer
+# ========https://www.django-rest-framework.org/tutorial/1-serialization/#writing-regular-django-views-using-our-serializer
 @csrf_exempt
 def jedorg_list(request):
     '''List all jednostek organizacyjnych'''
@@ -63,7 +64,8 @@ def jedorg_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
-#@csrf_exempt
+
+# @csrf_exempt
 ##def jednostka_detail(request, id_jednostki):
 #    """
 #    Retrieve, update or delete a code snippet
@@ -71,7 +73,7 @@ def jedorg_list(request):
 #    try:
 #        snippet = JednostkaOrganizacyjna.objects.get(id=pk)
 
-#=======================
+# =======================
 
 class Uzytkownik(APIView):
     queryset = Uzytkownik.objects.all()
@@ -123,7 +125,8 @@ def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
     # print(jed_org)
     return HttpResponse("witam:" + str(jednostkaOrganizacyjna_id))
 
-#================ https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
+
+# ================ https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
 
 @csrf_exempt
 def pomiar_list(request):
@@ -140,6 +143,7 @@ def pomiar_list(request):
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
+
 
 @csrf_exempt
 def pomiar_detail(request, pk):
@@ -169,3 +173,43 @@ def pomiar_detail(request, pk):
     elif request.method == 'DELETE':
         pomiar.delete()
         return HttpResponse(status=204)
+
+
+@csrf_exempt
+def logpomiar_list(request):
+    if request.method == 'GET':
+        logpomiar = LogPomiarowy.objects.all()
+        serializer = LogPomiarowySerializer(logpomiar, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = PomiarSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
+def logpomiar_detail(request, pk):
+    try:
+        logpomiar = LogPomiarowy.objects.get(pk=pk)
+    except:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = LogPomiarowySerializer(logpomiar)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = LogPomiarowySerializer(logpomiar, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        logpomiar.delete()
+        return HttpResponse(status)

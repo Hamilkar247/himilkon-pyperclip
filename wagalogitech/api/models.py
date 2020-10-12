@@ -96,7 +96,10 @@ class LogPomiarowy(models.Model):
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     opis = models.CharField(max_length=500)
     data = models.DateField()
-    pomiar = models.ForeignKey(Pomiar, on_delete=models.CASCADE)
+    #pomiar = models.ForeignKey(Pomiar, on_delete=models.CASCADE)
+
+    def __str__ (self):
+        return str(self.opis)
 
     class Meta:
         verbose_name = "Log Pomiarowy"

@@ -11,6 +11,8 @@ urlpatterns = [
     path('response_jednostkaOrganizacyjna/<int:jednostkaOrganizacyjna_id>/', views.response_jednostkaOrganizacyjna),
     #==============https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
     path('api/pomiary', views.pomiar_list),
-    path('api/pomiary/<int:pk>/', views.pomiar_detail)
+    path('api/pomiary/<int:pk>/', views.pomiar_detail),
+    path('api/logpomiarowe', views.logpomiar_list),
+    path('api/logpomiarowe/<int:pk>/', views.logpomiar_detail)#czemu pk?
 ]
 
