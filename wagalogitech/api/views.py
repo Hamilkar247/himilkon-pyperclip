@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from rest_framework import status, generics
 from rest_framework import authtoken
+from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -126,11 +127,10 @@ def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
     return HttpResponse("witam:" + str(jednostkaOrganizacyjna_id))
 
 
-# ================ https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
-
-@csrf_exempt
+# ================ https://www.django-rest-framework.org/tutorial/2-requests-and-responses/#pulling-it-all-together
+@api_view(['GET', 'POSt'])
 def pomiar_list(request):
-    """ List all pomiar, or create a new snippet"""
+    """ List all pomiar, or create a new snippet """
     if request.method == 'GET':
         pomiar = Pomiar.objects.all()
         serializer = PomiarSerializer(pomiar, many=True)
@@ -141,11 +141,10 @@ def pomiar_list(request):
         serializer = PomiarSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-@csrf_exempt
+@api_view(['GET', 'PUT', 'DELETE'])
 def pomiar_detail(request, pk):
     '''
     Retrieve, update or delete a code snippet
@@ -156,23 +155,22 @@ def pomiar_detail(request, pk):
     try:
         pomiar = Pomiar.objects.get(pk=pk)
     except Pomiar.DoesNotExist:
-        return HttpResponse(status=404)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = PomiarSerializer(pomiar)
-        return JsonResponse(serializer.data)
+        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = PomiarSerializer(pomiar, data=data)
+        serializer = PomiarSerializer(pomiar, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
         pomiar.delete()
-        return HttpResponse(status=204)
+        return Response(status=204)
 
 
 @csrf_exempt
