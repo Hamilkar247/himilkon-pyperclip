@@ -1,6 +1,8 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
+from django.shortcuts import redirect
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('jednostkiOrganizacyjne/', views.jednostka.as_view()),
@@ -11,9 +13,9 @@ urlpatterns = [
     #, serializer_class=UzytkownikSerializer), name='user-list')
     path('response_jednostkaOrganizacyjna/<int:jednostkaOrganizacyjna_id>/', views.response_jednostkaOrganizacyjna),
     #==============https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
-    path('api/pomiary', views.pomiar_list),
+    path('api/pomiary/', views.pomiar_list), # do zrobienia rediredct na tą stronę z 'api/pomiary'
     path('api/pomiary/<int:pk>/', views.pomiar_detail),
-    path('api/logpomiarowe', views.logpomiar_list),
+    path('api/logpomiarowe', views.logpomiar_list), # do zrobienia rediredct na tą stronę z 'api/pomiary'
     path('api/logpomiarowe/<int:pk>/', views.logpomiar_detail)#czemu pk?
 ]
 
