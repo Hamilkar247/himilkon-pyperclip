@@ -173,20 +173,20 @@ def pomiar_detail(request, pk):
         return Response(status=204)
 
 
-@csrf_exempt
+@api_view(['GET', 'POST'])
 def logpomiar_list(request):
     if request.method == 'GET':
         logpomiar = LogPomiarowy.objects.all()
         serializer = LogPomiarowySerializer(logpomiar, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = PomiarSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
 @csrf_exempt
@@ -194,20 +194,19 @@ def logpomiar_detail(request, pk):
     try:
         logpomiar = LogPomiarowy.objects.get(pk=pk)
     except:
-        return HttpResponse(status=404)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = LogPomiarowySerializer(logpomiar)
-        return JsonResponse(serializer.data)
+        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = LogPomiarowySerializer(logpomiar, data=data)
+        serializer = LogPomiarowySerializer(logpomiar, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         logpomiar.delete()
-        return HttpResponse(status)
+        return Response(status=status.HTTP_204_NO_CONTENT)
