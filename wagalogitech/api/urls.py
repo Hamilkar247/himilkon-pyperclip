@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
 urlpatterns = [
@@ -16,3 +17,4 @@ urlpatterns = [
     path('api/logpomiarowe/<int:pk>/', views.logpomiar_detail)#czemu pk?
 ]
 
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=[ 'json', 'html', 'yaml'])
