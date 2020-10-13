@@ -1,5 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
@@ -126,52 +126,50 @@ def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
     # print(jed_org)
     return HttpResponse("witam:" + str(jednostkaOrganizacyjna_id))
 
+#https://www.django-rest-framework.org/tutorial/3-class-based-views/
+class PomiarList(APIView):
+    """ List all pomiar, or create a new pomiar"""
+    def get(self, request, format=None):
+        pomiary = Pomiar.objects.all()
+        serializer = PomiarSerializer(pomiary, many=True)
+        return Response(serializer.data)
 
-# ================ https://www.django-rest-framework.org/tutorial/2-requests-and-responses/#pulling-it-all-together
-@api_view(['GET', 'POSt'])
-def pomiar_list(request):
-    """ List all pomiar, or create a new snippet """
-    if request.method == 'GET':
-        pomiar = Pomiar.objects.all()
-        serializer = PomiarSerializer(pomiar, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = PomiarSerializer(data=data)
+    def post(self, request, format=None):
+        serializer = PomiarSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def pomiar_detail(request, pk):
-    '''
-    Retrieve, update or delete a code snippet
-    :param request:
-    :param pk:
-    :return:
-    '''
-    try:
-        pomiar = Pomiar.objects.get(pk=pk)
-    except Pomiar.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'GET':
+#https://www.django-rest-framework.org/tutorial/3-class-based-views/
+class PomiarDetail(APIView):
+    """
+    Retrieve, update 
+    """
+    def get_object(self, pk):
+        try:
+            return Pomiar.objects.get(pk=pk)
+        except Pomiar.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        pomiar = self.get_object(pk)
         serializer = PomiarSerializer(pomiar)
         return Response(serializer.data)
 
-    elif request.method == 'PUT':
+    def put(self, request, pk, format=None):
+        pomiar = self.get_object(pk)
         serializer = PomiarSerializer(pomiar, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'DELETE':
+    def delete(self, request, pk, format=None):
+        pomiar = self.get_object(pk)
         pomiar.delete()
-        return Response(status=204)
-
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET', 'POST'])
 def logpomiar_list(request):
