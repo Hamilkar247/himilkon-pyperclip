@@ -128,37 +128,17 @@ def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
     return HttpResponse("witam:" + str(jednostkaOrganizacyjna_id))
 
 
-# mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class PomiarList(mixins.ListModelMixin,
-                 mixins.CreateModelMixin,
-                 generics.GenericAPIView):
+# already mixed-in generic views  https://www.django-rest-framework.org/tutorial/3-class-based-views/
+class PomiarList(generics.ListCreateAPIView):
     """ List all pomiar, or create a new pomiar"""
     queryset = Pomiar.objects.all()
     serializer_class = PomiarSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-
-# mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class PomiarDetail(mixins.RetrieveModelMixin,
-                   mixins.UpdateModelMixin,
-                   mixins.DestroyModelMixin,
-                   generics.GenericAPIView):
+# already mixex-in generic view https://www.django-rest-framework.org/tutorial/3-class-based-views/
+class PomiarDetail(generics.RetrieveAPIViewDestroyAPIView):
     queryset = Pomiar.objects.all()
     serializer_class = PomiarSerializer
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
 
 
 # mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
