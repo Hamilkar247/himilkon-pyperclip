@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-from rest_framework import status, generics
+from rest_framework import status, generics, mixins
 from rest_framework import authtoken
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
@@ -126,50 +126,39 @@ def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
     # print(jed_org)
     return HttpResponse("witam:" + str(jednostkaOrganizacyjna_id))
 
-#https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class PomiarList(APIView):
+
+# mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
+class PomiarList(mixins.ListModelMixin,
+                 mixins.CreateModelMixin,
+                 generics.GenericAPIView):
     """ List all pomiar, or create a new pomiar"""
-    def get(self, request, format=None):
-        pomiary = Pomiar.objects.all()
-        serializer = PomiarSerializer(pomiary, many=True)
-        return Response(serializer.data)
+    queryset = Pomiar.objects.all()
+    serializer_class = PomiarSerializer
 
-    def post(self, request, format=None):
-        serializer = PomiarSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
-#https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class PomiarDetail(APIView):
-    """
-    Retrieve, update 
-    """
-    def get_object(self, pk):
-        try:
-            return Pomiar.objects.get(pk=pk)
-        except Pomiar.DoesNotExist:
-            raise Http404
+# mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
+class PomiarDetail(mixins.RetrieveModelMixin,
+                   mixins.UpdateModelMixin,
+                   mixins.DestroyModelMixin,
+                   generics.GenericAPIView):
+    queryset = Pomiar.objects.all()
+    serializer_class = PomiarSerializer
 
-    def get(self, request, pk, format=None):
-        pomiar = self.get_object(pk)
-        serializer = PomiarSerializer(pomiar)
-        return Response(serializer.data)
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
-    def put(self, request, pk, format=None):
-        pomiar = self.get_object(pk)
-        serializer = PomiarSerializer(pomiar, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
 
-    def delete(self, request, pk, format=None):
-        pomiar = self.get_object(pk)
-        pomiar.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
 
 @api_view(['GET', 'POST'])
 def logpomiar_list(request):
@@ -238,9 +227,9 @@ class LogAdminDetail(APIView):
         serializer = LogAdministracyjnySerializer(logadmin)
         return Response(serializer.data)
 
-    def put(self, request,pk, format=None):
+    def put(self, request, pk, format=None):
         logadmin = self.get_object(pk)
-        serializer = LogAdministracyjnySerializer(logadmin,data=request.data)
+        serializer = LogAdministracyjnySerializer(logadmin, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
