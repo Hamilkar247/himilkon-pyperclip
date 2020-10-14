@@ -69,6 +69,9 @@ class SeriaPomiarowa(models.Model):
 
     # jednostka_organizacyjna = models.ForeignKey(JednostkaOrganizacyjna, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.nazwa_sesji)
+
     class Meta:
         verbose_name = "Seria Pomiarowwa"
         verbose_name_plural = "Serie Pomiarowe"

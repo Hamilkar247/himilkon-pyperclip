@@ -18,12 +18,13 @@ from .models import (
 
     JednostkaOrganizacyjna,
     Uzytkownik,
-    Pomiar, LogPomiarowy, LogAdministracyjny,
+    Pomiar, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa,
 )
 from .serializers import (
 
     JednostkaOrganizacyjnaSerializer,
-    UzytkownikSerializer, PomiarSerializer, LogPomiarowySerializer, LogAdministracyjnySerializer
+    UzytkownikSerializer, PomiarSerializer, LogPomiarowySerializer, LogAdministracyjnySerializer,
+    SeriaPomiarowaSerializer
 
 )
 
@@ -160,6 +161,37 @@ class PomiarDetail(mixins.RetrieveModelMixin,
         return self.destroy(request, *args, **kwargs)
 
 
+# mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
+class SeriaPomiarowaList(mixins.ListModelMixin,
+                     mixins.CreateModelMixin,
+                     generics.GenericAPIView):
+    queryset = SeriaPomiarowa.objects.all()
+    serializer_class = SeriaPomiarowaSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+# mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
+class SeriaPomiarowaDetail(mixins.RetrieveModelMixin,
+                           mixins.UpdateModelMixin,
+                           mixins.DestroyModelMixin,
+                           generics.GenericAPIView):
+    queryset = SeriaPomiarowa.objects.all()
+    serializer_class = PomiarSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
 @api_view(['GET', 'POST'])
 def logpomiar_list(request):
     if request.method == 'GET':
@@ -239,3 +271,5 @@ class LogAdminDetail(APIView):
         logadmin = self.get_object(pk)
         logadmin.delete()
         return Response(status.HTTP_204_NO_CONTENT)
+
+
