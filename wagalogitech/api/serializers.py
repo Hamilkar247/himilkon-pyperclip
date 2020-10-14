@@ -3,7 +3,7 @@ from datetime import timezone
 from rest_framework import serializers
 from .models import (
     JednostkaOrganizacyjna,
-    Uzytkownik, Pomiar, SesjaUzytkownika, LogPomiarowy,
+    Uzytkownik, Pomiar, SesjaUzytkownika, LogPomiarowy, LogAdministracyjny,
 )
 
 
@@ -69,4 +69,12 @@ class PomiarSerializer(serializers.ModelSerializer):
 class LogPomiarowySerializer(serializers.ModelSerializer):
     class Meta:
         model = LogPomiarowy
+        fields = "__all__"
+
+
+#=========== https://www.django-rest-framework.org/tutorial/3-class-based-views/
+
+class LogAdministracyjnySerializer(serializers.ModelSerializer):
+    class Meta:
+        model =  LogAdministracyjny
         fields = "__all__"

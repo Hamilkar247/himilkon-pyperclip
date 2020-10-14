@@ -52,14 +52,16 @@ class LogAdministracyjny(models.Model):
     opis = models.CharField(max_length=500, verbose_name="Opis")
     data = models.DateField(blank=False, verbose_name="Data")
     czynnosc = models.CharField(max_length=200, verbose_name="Czynność")
-    uzytkownik = models.ForeignKey(Uzytkownik, on_delete=models.CASCADE, verbose_name="Użytkownik")
-    jednostka_organizacyjna = models.ForeignKey(JednostkaOrganizacyjna, on_delete=models.CASCADE,
-                                                verbose_name="Jednostka organizacyjna")
+    #uzytkownik = models.ForeignKey(Uzytkownik, on_delete=models.CASCADE, verbose_name="Użytkownik")
+    #jednostka_organizacyjna = models.ForeignKey(JednostkaOrganizacyjna, on_delete=models.CASCADE,
+    #                                            verbose_name="Jednostka organizacyjna")
 
     class Meta:
         verbose_name = "Log Administracyjny"
         verbose_name_plural = "Logi Administracyjne"
 
+    def __str__(self):
+        return str(self.opis)
 
 class SeriaPomiarowa(models.Model):
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

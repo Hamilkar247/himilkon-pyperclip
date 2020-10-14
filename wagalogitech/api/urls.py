@@ -17,7 +17,10 @@ urlpatterns = [
     path('api/pomiary/<int:pk>/', views.PomiarDetail.as_view()),
     #==============https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
     path('api/logpomiarowe', views.logpomiar_list), # do zrobienia rediredct na tą stronę z 'api/pomiary'
-    path('api/logpomiarowe/<int:pk>/', views.logpomiar_detail)#czemu pk?
+    path('api/logpomiarowe/<int:pk>/', views.logpomiar_detail),#czemu pk?
+    #============== https://www.django-rest-framework.org/tutorial/3-class-based-views/
+    path('api/logadministracyjny', views.LogAdminList.as_view()),
+    path('api/logadministracyjny/<int:pk>/', views.LogAdminDetail.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
