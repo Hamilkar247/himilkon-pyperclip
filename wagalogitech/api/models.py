@@ -1,9 +1,7 @@
 from django.db import models
-import uuid
-
-
-# uuid Universal Unique Identifier python library
-# which helps in generating random objects of 128 bits
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters.html import HtmlFormatter
+from pygments import highlight
 
 
 class JednostkaOrganizacyjna(models.Model):
@@ -85,9 +83,19 @@ class Pomiar(models.Model):
     wartosc = models.CharField(max_length=300, verbose_name="wartość")
     data_pomiaru = models.DateTimeField(blank=False, verbose_name="data pomiaru", auto_now_add=True)
     #sesja_uzytkownika = models.ForeignKey(SesjaUzytkownika, on_delete=models.CASCADE)
+    uzytkownik = models.ForeignKey('auth.User', related_name='pomiary', on_delete=models.CASCADE)
+    highlighted = models.TextField()
 
     def __str__(self):
         return str(self.data_pomiaru)
+
+    def save(self, *args, **kwargs):
+        lexer = get_lexer_by_name(self.wartosc)
+        linenos = 'table' if self.linenos else False
+        options = {'title': self.title} if self.title else {}
+        formatter = HtmlFormatter(style=self.style, linenos=linenos, full=True, **options)
+        self.highlighted = highlight(self.code, lexer, formatter)
+        super(Pomiar, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Pomiar"

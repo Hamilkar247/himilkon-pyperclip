@@ -135,7 +135,7 @@ class PomiarList(generics.ListCreateAPIView):
     serializer_class = PomiarSerializer
 
 
-# already mixex-in generic view https://www.django-rest-framework.org/tutorial/3-class-based-views/
+# already mixed-in generic view https://www.django-rest-framework.org/tutorial/3-class-based-views/
 class PomiarDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Pomiar.objects.all()
     serializer_class = PomiarSerializer
