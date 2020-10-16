@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-from rest_framework import status, generics, mixins
+from rest_framework import status, generics, mixins, permissions
 from django.contrib.auth.models import User
 from rest_framework import authtoken
 from rest_framework.decorators import api_view
@@ -112,6 +112,7 @@ class PomiarList(generics.ListCreateAPIView):
     """ List all pomiar, or create a new pomiar"""
     queryset = Pomiar.objects.all()
     serializer_class = PomiarSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     #metoda potrzebna gdy chce użyc tego modelu w innym zrobie do pomiaru PrimaryKeyRelatedField
     def perform_crete(self, serializer):
@@ -122,7 +123,7 @@ class PomiarList(generics.ListCreateAPIView):
 class PomiarDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Pomiar.objects.all()
     serializer_class = PomiarSerializer
-
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 # mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
 class SeriaPomiarowaList(mixins.ListModelMixin,
