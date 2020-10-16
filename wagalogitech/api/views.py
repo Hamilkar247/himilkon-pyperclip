@@ -136,7 +136,7 @@ class PomiarList(generics.ListCreateAPIView):
 
 
 # already mixex-in generic view https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class PomiarDetail(generics.RetrieveAPIViewDestroyAPIView):
+class PomiarDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Pomiar.objects.all()
     serializer_class = PomiarSerializer
 
@@ -161,7 +161,7 @@ class SeriaPomiarowaDetail(mixins.RetrieveModelMixin,
                            mixins.DestroyModelMixin,
                            generics.GenericAPIView):
     queryset = SeriaPomiarowa.objects.all()
-    serializer_class = PomiarSerializer
+    serializer_class = SeriaPomiarowaSerializer
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

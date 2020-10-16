@@ -20,7 +20,10 @@ urlpatterns = [
     path('api/logpomiarowe/<int:pk>/', views.logpomiar_detail),#czemu pk?
     #============== https://www.django-rest-framework.org/tutorial/3-class-based-views/
     path('api/logadministracyjny', views.LogAdminList.as_view()),
-    path('api/logadministracyjny/<int:pk>/', views.LogAdminDetail.as_view())
+    path('api/logadministracyjny/<int:pk>/', views.LogAdminDetail.as_view()),
+    #============== http://127.0.0.1:8000/admin/api/seriapomiarowa/
+    path('api/seriepomiarowe', views.SeriaPomiarowaList.as_view()),
+    path('api/seriepomiarowe/<int:pk>/', views.SeriaPomiarowaDetail.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
