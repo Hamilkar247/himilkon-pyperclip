@@ -32,6 +32,14 @@ from .serializers import (
 )
 
 
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'pomiary': reverse('pomiary-list', request=request, format=format)
+    })
+
+
 class jednostka(generics.ListAPIView):
     queryset = JednostkaOrganizacyjna.objects.all()  # filter(id=1)
     serializer_class = JednostkaOrganizacyjnaSerializer
