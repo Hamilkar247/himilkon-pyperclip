@@ -1,11 +1,11 @@
 from datetime import timezone
 
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import (
     JednostkaOrganizacyjna,
-    Uzytkownik, Pomiar, SesjaUzytkownika, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa,
+    Pomiar, SesjaUzytkownika, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa,
 )
-
 
 class JednostkaOrganizacyjnaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,10 +15,12 @@ class JednostkaOrganizacyjnaSerializer(serializers.ModelSerializer):
         # fields = ['id', 'nazwa', 'opis']
 
 
-class UzytkownikSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
+    pomiary = serializers.PrimaryKeyRelatedField(many=True, queryset=Pomiar.objects.all())
+
     class Meta:
-        model = Uzytkownik
-        fields = "__all__"
+        model = User
+        fields = "__all__" #['id', 'username', 'pomiary']
 
 
 # class PomiarSerializer(serializers.ModelSerializer):
@@ -59,6 +61,7 @@ class PomiarSerializer(serializers.ModelSerializer):
     An automatically determined set of fields.
     Simple default implementations for the create() and update() methods.
     """
+    owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Pomiar

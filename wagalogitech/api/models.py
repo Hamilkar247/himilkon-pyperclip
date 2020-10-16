@@ -1,8 +1,4 @@
 from django.db import models
-from pygments.lexers import get_lexer_by_name
-from pygments.formatters.html import HtmlFormatter
-from pygments import highlight
-
 
 class JednostkaOrganizacyjna(models.Model):
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -17,28 +13,28 @@ class JednostkaOrganizacyjna(models.Model):
         verbose_name_plural = "Jednostki Organizacyjne"
 
 
-class Uzytkownik(models.Model):
-    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    login = models.CharField(max_length=120, unique=True, verbose_name="Login")
-    haslo = models.CharField(max_length=120, unique=True, verbose_name="Haslo")
-    isSuperuser = models.BooleanField()
-
-    def __str__(self):
-        return self.login
-
-    # jednostka_organizacyjna = models.ForeignKey(JednostkaOrganizacyjna)
-    # def __str__(self):
-    #    return self.log
-
-    class Meta:
-        verbose_name = "Użytkownik"
-        verbose_name_plural = "Użytkownicy"
+#class Uzytkownik(models.Model):
+#    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+#    login = models.CharField(max_length=120, unique=True, verbose_name="Login")
+#    haslo = models.CharField(max_length=120, unique=True, verbose_name="Haslo")
+#    isSuperuser = models.BooleanField()
+#
+#    def __str__(self):
+#        return self.login
+#
+#    # jednostka_organizacyjna = models.ForeignKey(JednostkaOrganizacyjna)
+#    # def __str__(self):
+#    #    return self.log
+#
+#    class Meta:
+#        verbose_name = "Użytkownik"
+#        verbose_name_plural = "Użytkownicy"
 
 
 class SesjaUzytkownika(models.Model):
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
     # pomiar = models.ForeignKey(Pomiar, on_delete=models.CASCADE)
-    uzytkownik = models.ForeignKey(Uzytkownik, on_delete=models.CASCADE)
+    #uzytkownik = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Sesja Użytkownika"
@@ -83,18 +79,14 @@ class Pomiar(models.Model):
     wartosc = models.CharField(max_length=300, verbose_name="wartość")
     data_pomiaru = models.DateTimeField(blank=False, verbose_name="data pomiaru", auto_now_add=True)
     #sesja_uzytkownika = models.ForeignKey(SesjaUzytkownika, on_delete=models.CASCADE)
-    uzytkownik = models.ForeignKey('auth.User', related_name='pomiary', on_delete=models.CASCADE)
-    highlighted = models.TextField()
+    owner = models.ForeignKey('auth.User', related_name='pomiary', on_delete=models.CASCADE)
+    #highlighted = models.TextField()
 
     def __str__(self):
         return str(self.data_pomiaru)
 
     def save(self, *args, **kwargs):
-        lexer = get_lexer_by_name(self.wartosc)
-        linenos = 'table' if self.linenos else False
-        options = {'title': self.title} if self.title else {}
-        formatter = HtmlFormatter(style=self.style, linenos=linenos, full=True, **options)
-        self.highlighted = highlight(self.code, lexer, formatter)
+        czyWazny = 'table' if self.czyWazny else False
         super(Pomiar, self).save(*args, **kwargs)
 
     class Meta:

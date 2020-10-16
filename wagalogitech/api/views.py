@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 from rest_framework import status, generics, mixins
+from django.contrib.auth.models import User
 from rest_framework import authtoken
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
@@ -14,17 +15,18 @@ from . import serializers
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from django.contrib.auth.models import User
+
 from .models import (
 
     JednostkaOrganizacyjna,
-    Uzytkownik,
     Pomiar, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa,
 )
 from .serializers import (
 
     JednostkaOrganizacyjnaSerializer,
-    UzytkownikSerializer, PomiarSerializer, LogPomiarowySerializer, LogAdministracyjnySerializer,
-    SeriaPomiarowaSerializer
+    PomiarSerializer, LogPomiarowySerializer, LogAdministracyjnySerializer,
+    SeriaPomiarowaSerializer, UserSerializer
 
 )
 
@@ -77,37 +79,14 @@ def jedorg_list(request):
 
 # =======================
 
-class Uzytkownik(APIView):
-    queryset = Uzytkownik.objects.all()
-    serializer_class = UzytkownikSerializer
-
-    # """
-    # do uzupelnienia
-    # """
-
-    def get(self, uzytkownik_login):  # ,format=None):
-        """
-        zwraca liste uzytkownikow
-        :param request:
-        :param format:
-        :return:
-        """
-        print(uzytkownik_login)
-        queryset = Uzytkownik.objects.get(login=uzytkownik_login)
-        serializers_class = UzytkownikSerializer
-        # return Response('na buty teutatesa')#serializers_class.data)
-        # uzytkownicy_loginy = [uzytkownik.login for uzytkownik in Uzytkownik.objects.all()]
-        return Response(serializers_class)
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
-# class UserList(generics.ListCreateAPIView):
-#    queryset = Uzytkownik.objects.all()
-#    serializer_class = UzytkownikSerializer
-#
-#    def list(self, request):
-#        queryset = self.get_queryset()
-#        serializer = UzytkownikSerializer(queryset, many=True)
-#        return Response(serializer.data)
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 # def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
@@ -133,6 +112,10 @@ class PomiarList(generics.ListCreateAPIView):
     """ List all pomiar, or create a new pomiar"""
     queryset = Pomiar.objects.all()
     serializer_class = PomiarSerializer
+
+    #metoda potrzebna gdy chce użyc tego modelu w innym zrobie do pomiaru PrimaryKeyRelatedField
+    def perform_crete(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 # already mixed-in generic view https://www.django-rest-framework.org/tutorial/3-class-based-views/
