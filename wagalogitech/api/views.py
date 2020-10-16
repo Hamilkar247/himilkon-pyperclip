@@ -22,6 +22,7 @@ from .models import (
     JednostkaOrganizacyjna,
     Pomiar, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa,
 )
+from .permissions import IsOwnerOrReadOnly
 from .serializers import (
 
     JednostkaOrganizacyjnaSerializer,
@@ -123,7 +124,7 @@ class PomiarList(generics.ListCreateAPIView):
 class PomiarDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Pomiar.objects.all()
     serializer_class = PomiarSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 # mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
 class SeriaPomiarowaList(mixins.ListModelMixin,
