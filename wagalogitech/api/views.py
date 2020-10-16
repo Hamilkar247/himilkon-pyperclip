@@ -115,7 +115,7 @@ class PomiarList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     #metoda potrzebna gdy chce użyc tego modelu w innym zrobie do pomiaru PrimaryKeyRelatedField
-    def perform_crete(self, serializer):
+    def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
 
