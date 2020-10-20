@@ -1,40 +1,18 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views import PomiarViewSet, UserViewSet, api_root
 from django.shortcuts import redirect
 from django.views.generic import RedirectView
+from rest_framework.routers import DefaultRouter
+from . import views
 
-pomiar_list = PomiarViewSet.as_view({
-    'get': 'list',
-    'post': 'create'
-})
+router = DefaultRouter()
+router.register(r'pomiary', views.PomiarViewSet)
+router.register(r'users', views.UserViewSet)
 
-pomiar_detail = PomiarViewSet.as_view({
-   'get': 'retrieve',
-   'put': 'update',
-   'patch': 'partial_update',
-   'delete': 'destroy'
-})
-
-pomiar_list = UserViewSet.as_view({
-    'get': 'list'
-})
-
-user_list = UserViewSet.as_view({
-    'get': 'list'
-})
-
-user_detail = UserViewSet.as_view({
-    'get': 'retrieve'
-})
-
-urlpatterns = format_suffix_patterns([
-    path('api/', api_root),
-    path('api/pomiary/', pomiar_list, name="pomiar-list"),
-    path('api/pomiary/<int:pk>/', pomiar_detail, name="pomiar-detail"),
-    path('api/users/', user_list, name='user-list'),
-    path('api/users/<int:pk>/', user_detail, name='user-detail')
-])
+urlpatterns = [
+    path('', include(router.urls)),
+]
 
 #urlpatterns = [
 #    path('jednostkiOrganizacyjne/', views.jednostka.as_view()),
