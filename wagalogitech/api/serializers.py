@@ -3,13 +3,13 @@ from datetime import timezone
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import (
-    JednostkaOrganizacyjna,
+    Organizacja,
     Pomiar, SesjaUzytkownika, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa,
 )
 
-class JednostkaOrganizacyjnaSerializer(serializers.ModelSerializer):
+class OrganizacjaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = JednostkaOrganizacyjna
+        model = Organizacja
         fields = "__all__"
         # exclude = [ 'id', ]
         # fields = ['id', 'nazwa', 'opis']

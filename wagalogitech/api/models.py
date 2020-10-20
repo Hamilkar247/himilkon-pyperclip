@@ -1,6 +1,6 @@
 from django.db import models
 
-class JednostkaOrganizacyjna(models.Model):
+class Organizacja(models.Model):
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nazwa = models.CharField(max_length=200, verbose_name="Nazwa")
     opis = models.CharField(max_length=500, verbose_name="Opis")
@@ -8,9 +8,13 @@ class JednostkaOrganizacyjna(models.Model):
     def __str__(self):
         return self.nazwa
 
+    def save(self, *args, **kwargs):
+        super(Organizacja, self).save(*args, **kwargs)
+
     class Meta:
-        verbose_name = "Jednostka Organizacyjna"
-        verbose_name_plural = "Jednostki Organizacyjne"
+        verbose_name = "Organizacja"
+        verbose_name_plural = "Organizacje"
+        ordering = ['nazwa']
 
 
 #class Uzytkownik(models.Model):

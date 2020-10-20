@@ -20,15 +20,13 @@ from django.contrib.auth.models import User
 
 from .models import (
 
-    JednostkaOrganizacyjna,
-    Pomiar, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa,
+    Pomiar, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa, Organizacja,
 )
 from .permissions import IsOwnerOrReadOnly
 from .serializers import (
 
-    JednostkaOrganizacyjnaSerializer,
     PomiarSerializer, LogPomiarowySerializer, LogAdministracyjnySerializer,
-    SeriaPomiarowaSerializer, UserSerializer
+    SeriaPomiarowaSerializer, UserSerializer, OrganizacjaSerializer
 
 )
 
@@ -37,13 +35,16 @@ from .serializers import (
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
-        'pomiary': reverse('pomiar-list', request=request, format=format)
+        'pomiary': reverse('pomiar-list', request=request, format=format),
+        'organizacja': reverse('organizacja-list', request=request, format=format)
     })
 
 
-class jednostka(generics.ListAPIView):
-    queryset = JednostkaOrganizacyjna.objects.all()  # filter(id=1)
-    serializer_class = JednostkaOrganizacyjnaSerializer
+class OrganizacjaViewSet(viewsets.ModelViewSet):
+
+    queryset = Organizacja.objects.all()  # filter(id=1)
+    serializer_class = OrganizacjaSerializer
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly,]
 
     # def get(self, request):
     #    jednostkaOrganizacyjna = JednostkaOrganizacyjna.objects.all()
