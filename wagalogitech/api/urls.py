@@ -10,6 +10,8 @@ router = DefaultRouter()
 router.register(r'pomiary', views.PomiarViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'organizacje', views.OrganizacjaViewSet)
+router.register(r'sesjeuzytkownika', views.SesjaUzytkownikaViewSet)
+router.register(r'logadministracyjny', views.LogAdministracyjnyViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),

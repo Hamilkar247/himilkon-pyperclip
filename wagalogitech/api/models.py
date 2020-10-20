@@ -40,9 +40,20 @@ class SesjaUzytkownika(models.Model):
     # pomiar = models.ForeignKey(Pomiar, on_delete=models.CASCADE)
     #uzytkownik = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    #tymczasowo_dodane
+    start_sesji = models.DateTimeField(blank=False, verbose_name="start sesji")
+    owner = models.ForeignKey("auth.User", related_name='sesjeuzytkownika', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.start_sesji)
+
+    def save(self, *args, **kwargs):
+        super(SesjaUzytkownika, self).save(*args,**kwargs)
+
     class Meta:
         verbose_name = "Sesja Użytkownika"
         verbose_name_plural = "Sesje Użytkowników"
+        ordering = ['start_sesji']
 
 
 class LogAdministracyjny(models.Model):
@@ -50,6 +61,7 @@ class LogAdministracyjny(models.Model):
     opis = models.CharField(max_length=500, verbose_name="Opis")
     data = models.DateField(blank=False, verbose_name="Data")
     czynnosc = models.CharField(max_length=200, verbose_name="Czynność")
+    owner = models.ForeignKey("auth.User", related_name="logiadministracyjne", on_delete=models.CASCADE)
     #uzytkownik = models.ForeignKey(Uzytkownik, on_delete=models.CASCADE, verbose_name="Użytkownik")
     #jednostka_organizacyjna = models.ForeignKey(JednostkaOrganizacyjna, on_delete=models.CASCADE,
     #                                            verbose_name="Jednostka organizacyjna")
@@ -57,9 +69,13 @@ class LogAdministracyjny(models.Model):
     class Meta:
         verbose_name = "Log Administracyjny"
         verbose_name_plural = "Logi Administracyjne"
+        ordering = ['data']
 
     def __str__(self):
         return str(self.opis)
+
+    def save(self, *args, **kwargs):
+        super(LogAdministracyjny, self).save(*args, **kwargs)
 
 class SeriaPomiarowa(models.Model):
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

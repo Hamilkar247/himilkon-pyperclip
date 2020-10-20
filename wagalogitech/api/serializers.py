@@ -75,11 +75,22 @@ class LogPomiarowySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+
+class SesjaUzytkownikaSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = SesjaUzytkownika
+        fields = '__all__'
+
 #=========== https://www.django-rest-framework.org/tutorial/3-class-based-views/
 
 class LogAdministracyjnySerializer(serializers.ModelSerializer):
+
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
-        model =  LogAdministracyjny
+        model = LogAdministracyjny
         fields = "__all__"
 
 

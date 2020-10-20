@@ -20,13 +20,13 @@ from django.contrib.auth.models import User
 
 from .models import (
 
-    Pomiar, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa, Organizacja,
+    Pomiar, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa, Organizacja, SesjaUzytkownika,
 )
 from .permissions import IsOwnerOrReadOnly
 from .serializers import (
 
     PomiarSerializer, LogPomiarowySerializer, LogAdministracyjnySerializer,
-    SeriaPomiarowaSerializer, UserSerializer, OrganizacjaSerializer
+    SeriaPomiarowaSerializer, UserSerializer, OrganizacjaSerializer, SesjaUzytkownikaSerializer
 
 )
 
@@ -165,6 +165,23 @@ class SeriaPomiarowaDetail(mixins.RetrieveModelMixin,
         return self.destroy(request, *args, **kwargs)
 
 
+class SesjaUzytkownikaViewSet(viewsets.ModelViewSet):
+    queryset = SesjaUzytkownika.objects.all()
+    serializer_class = SesjaUzytkownikaSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class LogAdministracyjnyViewSet(viewsets.ModelViewSet):
+    queryset = LogAdministracyjny.objects.all()
+    serializer_class =  LogAdministracyjnySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
+
+
 @api_view(['GET', 'POST'])
 def logpomiar_list(request):
     if request.method == 'GET':
@@ -204,43 +221,3 @@ def logpomiar_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class LogAdminList(APIView):
-    def get(self, request, format=None):
-        logadmin = LogAdministracyjny.objects.all()
-        serializer = LogAdministracyjnySerializer(logadmin, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, format=None):
-        serializer = LogAdministracyjnySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
-
-
-# https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class LogAdminDetail(APIView):
-    def get_object(self, pk):
-        try:
-            return LogAdministracyjny.objects.get(pk=pk)
-        except Pomiar.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk, format=None):
-        logadmin = self.get_object(pk)
-        serializer = LogAdministracyjnySerializer(logadmin)
-        return Response(serializer.data)
-
-    def put(self, request, pk, format=None):
-        logadmin = self.get_object(pk)
-        serializer = LogAdministracyjnySerializer(logadmin, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, pk, format=None):
-        logadmin = self.get_object(pk)
-        logadmin.delete()
-        return Response(status.HTTP_204_NO_CONTENT)
