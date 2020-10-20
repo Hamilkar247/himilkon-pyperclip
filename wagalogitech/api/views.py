@@ -115,6 +115,7 @@ def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
     return HttpResponse("witam:" + str(jednostkaOrganizacyjna_id))
 
 
+#This time we've used the ModelViewSet class in order to get the complete set of default read and write operations.
 class PomiarViewSet(viewsets.ModelViewSet):
     """
     This viwset automatically provides 'list', 'create', 'retrieve',
