@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-from rest_framework import status, generics, mixins, permissions
+from rest_framework import status, generics, mixins, permissions, viewsets
 from django.contrib.auth.models import User
 from rest_framework import authtoken
 from rest_framework.decorators import api_view
@@ -89,15 +89,12 @@ def jedorg_list(request):
 
 # =======================
 
-class UserList(generics.ListAPIView):
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewsets automatically provides 'list' and 'detail' actions
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
 
 # def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
 # try:
