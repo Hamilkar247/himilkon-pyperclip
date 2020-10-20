@@ -4,12 +4,13 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-from rest_framework import status, generics, mixins, permissions
+from rest_framework import status, generics, mixins, permissions, viewsets
 from django.contrib.auth.models import User
 from rest_framework import authtoken
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 from . import serializers
 from django.http import HttpResponse, JsonResponse
@@ -36,7 +37,7 @@ from .serializers import (
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
-        'pomiary': reverse('pomiary-list', request=request, format=format)
+        'pomiary': reverse('pomiar-list', request=request, format=format)
     })
 
 
@@ -88,12 +89,10 @@ def jedorg_list(request):
 
 # =======================
 
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class UserDetail(generics.RetrieveAPIView):
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewsets automatically provides 'list' and 'detail' actions
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -116,28 +115,27 @@ def response_jednostkaOrganizacyjna(request, jednostkaOrganizacyjna_id):
     return HttpResponse("witam:" + str(jednostkaOrganizacyjna_id))
 
 
-# already mixed-in generic views  https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class PomiarList(generics.ListCreateAPIView):
-    """ List all pomiar, or create a new pomiar"""
+#This time we've used the ModelViewSet class in order to get the complete set of default read and write operations.
+class PomiarViewSet(viewsets.ModelViewSet):
+    """
+    This viwset automatically provides 'list', 'create', 'retrieve',
+    'update' and 'destroy' actions
+    """
+
     queryset = Pomiar.objects.all()
     serializer_class = PomiarSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
 
-    #metoda potrzebna gdy chce użyc tego modelu w innym zrobie do pomiaru PrimaryKeyRelatedField
+    # metoda potrzebna gdy chce użyc tego modelu w innym zrobie do pomiaru PrimaryKeyRelatedField
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
 
-# already mixed-in generic view https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class PomiarDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Pomiar.objects.all()
-    serializer_class = PomiarSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
 # mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
 class SeriaPomiarowaList(mixins.ListModelMixin,
-                     mixins.CreateModelMixin,
-                     generics.GenericAPIView):
+                         mixins.CreateModelMixin,
+                         generics.GenericAPIView):
     queryset = SeriaPomiarowa.objects.all()
     serializer_class = SeriaPomiarowaSerializer
 
@@ -164,6 +162,7 @@ class SeriaPomiarowaDetail(mixins.RetrieveModelMixin,
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
 
 @api_view(['GET', 'POST'])
 def logpomiar_list(request):
@@ -244,5 +243,3 @@ class LogAdminDetail(APIView):
         logadmin = self.get_object(pk)
         logadmin.delete()
         return Response(status.HTTP_204_NO_CONTENT)
-
-
