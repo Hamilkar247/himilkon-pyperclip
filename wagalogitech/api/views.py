@@ -10,6 +10,7 @@ from rest_framework import authtoken
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 from . import serializers
 from django.http import HttpResponse, JsonResponse
@@ -36,7 +37,7 @@ from .serializers import (
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
-        'pomiary': reverse('pomiary-list', request=request, format=format)
+        'pomiary': reverse('pomiar-list', request=request, format=format)
     })
 
 

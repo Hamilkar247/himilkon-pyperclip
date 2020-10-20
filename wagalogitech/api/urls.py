@@ -13,8 +13,10 @@ urlpatterns = [
     #, serializer_class=UzytkownikSerializer), name='user-list')
     path('response_jednostkaOrganizacyjna/<int:jednostkaOrganizacyjna_id>/', views.response_jednostkaOrganizacyjna),
     #===========https://www.django-rest-framework.org/tutorial/3-class-based-views/
-    path('api/pomiary/', views.PomiarList.as_view()), # do zrobienia rediredct na tą stronę z 'api/pomiary'
-    path('api/pomiary/<int:pk>/', views.PomiarDetail.as_view()),
+    path('api/pomiary/', views.PomiarList.as_view(),
+       name='pomiar-list'), # do zrobienia rediredct na tą stronę z 'api/pomiary'
+    path('api/pomiary/<int:pk>/', views.PomiarDetail.as_view(),
+       name='pomiar-detail'),
     #==============https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
     path('api/logpomiarowe', views.logpomiar_list), # do zrobienia rediredct na tą stronę z 'api/pomiary'
     path('api/logpomiarowe/<int:pk>/', views.logpomiar_detail),#czemu pk?
@@ -25,8 +27,12 @@ urlpatterns = [
     path('api/seriepomiarowe', views.SeriaPomiarowaList.as_view()),
     path('api/seriepomiarowe/<int:pk>/', views.SeriaPomiarowaDetail.as_view()),
     #============== https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/
-    path('api/users/', views.UserList.as_view()),
-    path('api/users/<int:pk>/', views.UserDetail.as_view())
+    path('api/users/', views.UserList.as_view(),
+       name='user-list'),
+    path('api/users/<int:pk>/', views.UserDetail.as_view(),
+       name='user-detail'),
+    #==========
+    path('api/', views.api_root)
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
