@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import PomiarViewSet, UserViewSet, api_root
+from .views import PomiarViewSet, UserViewSet, OrganizacjaViewSet, api_root
 from django.shortcuts import redirect
 from django.views.generic import RedirectView
 from rest_framework.routers import DefaultRouter
@@ -12,7 +12,7 @@ router.register(r'users', views.UserViewSet)
 router.register(r'organizacje', views.OrganizacjaViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
 ]
 
 #urlpatterns = [
