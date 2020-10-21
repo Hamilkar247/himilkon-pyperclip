@@ -133,36 +133,11 @@ class PomiarViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
 
-# mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class SeriaPomiarowaList(mixins.ListModelMixin,
-                         mixins.CreateModelMixin,
-                         generics.GenericAPIView):
+class SeriaPomiarowaViewSet(viewsets.ModelViewSet):
     queryset = SeriaPomiarowa.objects.all()
-    serializer_class = SeriaPomiarowaSerializer
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-
-# mixins https://www.django-rest-framework.org/tutorial/3-class-based-views/
-class SeriaPomiarowaDetail(mixins.RetrieveModelMixin,
-                           mixins.UpdateModelMixin,
-                           mixins.DestroyModelMixin,
-                           generics.GenericAPIView):
-    queryset = SeriaPomiarowa.objects.all()
-    serializer_class = SeriaPomiarowaSerializer
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+    serializer_class = SeriaPomiarowa
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
 
 
 class SesjaUzytkownikaViewSet(viewsets.ModelViewSet):

@@ -80,11 +80,15 @@ class LogAdministracyjny(models.Model):
 class SeriaPomiarowa(models.Model):
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nazwa_sesji = models.CharField(max_length=100, verbose_name="nazwa sesji")
+    owner = models.ForeignKey("auth.User", related_name='seriepomiarowe', on_delete=models.CASCADE)
 
     # jednostka_organizacyjna = models.ForeignKey(JednostkaOrganizacyjna, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.nazwa_sesji)
+
+    def save(self, *args, **kwargs):
+        super(SeriaPomiarowa, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Seria Pomiarowwa"

@@ -11,7 +11,8 @@ router.register(r'pomiary', views.PomiarViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'organizacje', views.OrganizacjaViewSet)
 router.register(r'sesjeuzytkownika', views.SesjaUzytkownikaViewSet)
-router.register(r'logadministracyjny', views.LogAdministracyjnyViewSet)
+router.register(r'logiadministracyjny', views.LogAdministracyjnyViewSet)
+router.register(r'seriepomiarowe', views.SeriaPomiarowaViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
