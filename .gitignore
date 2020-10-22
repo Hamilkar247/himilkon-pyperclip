@@ -5,3 +5,4 @@ venv/
 wagalogitech/api/__pycache__/
 __pycache__/
 *.pyc
+wagalogitech/mydatabase
