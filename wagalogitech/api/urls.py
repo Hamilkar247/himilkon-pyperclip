@@ -13,6 +13,7 @@ router.register(r'organizacje', views.OrganizacjaViewSet)
 router.register(r'sesjeuzytkownika', views.SesjaUzytkownikaViewSet)
 router.register(r'logiadministracyjny', views.LogAdministracyjnyViewSet)
 router.register(r'seriepomiarowe', views.SeriaPomiarowaViewSet)
+router.register(r'logipomiarowe', views.LogPomiarowyViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
