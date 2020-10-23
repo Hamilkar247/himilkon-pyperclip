@@ -1,5 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, Http404
+from django.shortcuts import render, get_object_or_404
 from api.models import Organizacja
 
 # Create your views here.
@@ -25,6 +25,5 @@ def organizacje(request):
 
 
 def szczegoly(request, organizacja_id):
-    query_set=Organizacja.objects.get(pk=organizacja_id)
-    output="Nazwa:" + str(query_set.nazwa) + " Opis:"+ str(query_set.opis)
-    return HttpResponse(output)
+    organizacja = get_object_or_404(Organizacja, pk=organizacja_id)
+    return render(request, "front/szczegoly.html", {'organizacja': organizacja})
