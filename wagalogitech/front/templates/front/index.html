@@ -1,0 +1,11 @@
+{% if organizacje_list %}
+    <ul>
+    {% for organizacja in organizacje_list %}
+         <li><a href="/front/organizacje/{{ organizacja.id }}">
+             nazwa:{{organizacja.nazwa}} opis:{{organizacja.opis}}
+         </a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Brak organizacji w bazie danych</p>
+{% endif %}

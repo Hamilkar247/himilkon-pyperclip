@@ -3,6 +3,7 @@ from django.shortcuts import render
 from api.models import Organizacja
 
 # Create your views here.
+from django.template import loader
 from requests import Response
 
 
@@ -15,9 +16,12 @@ def login(request):
 
 
 def organizacje(request):
-    query_set=Organizacja.objects.all()
-    output=', '.join([q.nazwa for q in query_set])
-    return HttpResponse("Organizacje:"+output)
+    organizacje_list = Organizacja.objects.all()
+    template = loader.get_template('front/index.html')
+    context = {
+        'organizacje_list': organizacje_list
+    }
+    return HttpResponse(template.render(context, request))
 
 
 def szczegoly(request, organizacja_id):
