@@ -21,7 +21,7 @@ def organizacje(request):
     context = {
         'organizacje_list': organizacje_list
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'front/index.html', context)
 
 
 def szczegoly(request, organizacja_id):
