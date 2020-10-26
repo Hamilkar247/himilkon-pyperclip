@@ -1,0 +1,16 @@
+<!-- templates/front/homex.html -->
+{% extends 'front/base.html' %}
+
+{% block title%}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+   Hi {{ user.username }}!
+   <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+   <p>You are not logged</p>
+<p> Hej! </p>
+   <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+{% endblock %}

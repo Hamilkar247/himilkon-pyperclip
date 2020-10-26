@@ -11,8 +11,18 @@ def front_root(request):
     return HttpResponse("Waga - LOGITECH")
 
 
+def home(request):
+    template = loader.get_template('front/home.html')
+    return render(request, 'front/home.html')
+
+
 def login(request):
-    return HttpResponse("Login")
+    template = loader.get_template('front/login.html')
+    return render(request, 'front/login.html')
+
+
+def logout(request):
+    return HttpResponse("Logout")
 
 
 def organizacje(request):
@@ -21,8 +31,7 @@ def organizacje(request):
     context = {
         'organizacje_list': organizacje_list
     }
-    return render(request, 'front/index.html', context)
-
+    return render(request, 'front/organizacje.html', context)
 
 def szczegoly(request, organizacja_id):
     organizacja = get_object_or_404(Organizacja, pk=organizacja_id)
