@@ -3,6 +3,7 @@
 .idea/
 venv/
 wagalogitech/api/__pycache__/
+front/api/__pycache__/
 __pycache__/
 *.pyc
 wagalogitech/mydatabase
