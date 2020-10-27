@@ -1,11 +1,13 @@
-{% if organizacje_list %}
-    <ul>
-    {% for organizacja in organizacje_list %}
-         <li><a href="/front/organizacje/{{ organizacja.id }}">
-             nazwa:{{organizacja.nazwa}} opis:{{organizacja.opis}}
-         </a></li>
-    {% endfor %}
-    </ul>
+
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }} !
+  <p><a href="/front/organizacje/">Twoje-organizacje</a></p>
+  <p><a href="/front/organizacje/">Twoje-organizacje</a></p>
+ <button class="btn btn-w-m btn-default">napisalem</button>
 {% else %}
-    <p>Brak organizacji w bazie danych</p>
+  <p>You are not logged in </p>
+
 {% endif %}
+{% endblock %}

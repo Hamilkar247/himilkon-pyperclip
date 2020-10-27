@@ -6,6 +6,10 @@
 {% block content %}
 {% if user.is_authenticated %}
    Hi {{ user.username }}!
+   <p><a href="/front/organizacje/">Twoje-organizacje</a></p>
+   <p><a href="/front/organizacje/">Twoje-organizacje</a></p>
+   <p><a href="/front/organizacje/">Twoje-organizacje</a></p>
+   <button class="btn btn-primary btn-sm">btn btn-primary btn-sm</button>
    <p><a href="{% url 'logout' %}">Log Out</a></p>
 {% else %}
    <p>You are not logged</p>
