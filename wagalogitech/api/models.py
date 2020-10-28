@@ -16,9 +16,9 @@ class Pomiar(models.Model):
     def __str__(self):
         return str(self.data_pomiaru)
 
-    def save(self, *args, **kwargs):
-        czyWazny = 'table' if self.czyWazny else False
-        super(Pomiar, self).save(*args, **kwargs)
+    #def save(self, *args, **kwargs):
+    #    czyWazny = 'table' if self.czyWazny else False
+    #    super(Pomiar, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Pomiar"

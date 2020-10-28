@@ -7,8 +7,10 @@ from api.models import Organizacja, Pomiar
 from django.template import loader
 from requests import Response
 from rest_framework import serializers
+from rest_framework.decorators import api_view
 
-from .forms import PomiarForm
+#from .forms import PomiarForm
+#from ..api.serializers import OrganizacjaSerializer
 
 
 def front_root(request):
@@ -35,12 +37,44 @@ def organizacje(request):
     context = {
         'organizacje_list': organizacje_list
     }
-    return render(request, template, context)
+    return render(request, 'front/organizacje.html', context)#template, context)
 
-
+#@api_view(['GET', 'POST'])
+#def list_organizacja(request):
+#    if request.method == "GET":
+#        organizacje = Organizacja.objects.all()
+#        serializer_class = OrganizacjaSerializer(organizacje, many=True)
+#        return Response(serializer_class.data)
+#    else:
+#        serializer_class = OrganizacjaSerializer(data=request.data)
+#        if serializer_class.is_valid():
+#            serializer_class.save()
+#            return Response(serializer_class.data, status=201) #Successfult post
+#        return Response(serializer_class.errors, status=400) #Invalid data
 def organizacja_detail(request, organizacja_id):
     organizacja = get_object_or_404(Organizacja, pk=organizacja_id)
     return render(request, "front/organizacja_detail.html", {'organizacja': organizacja})
+#
+#
+#@api_view(['GET','DELETE','PUT'])
+#def organizacja_details(request, nazwa):
+#    try:
+#        organizacja = Organizacja.objects.get(nazwa=nazwa)
+#    except:
+#        return Response(status=404)
+#
+#    if request.method == 'GET':
+#        serializer_class = OrganizacjaSerializer(organizacja)
+#        return Response(serializer_class.data)
+#    elif request.method == 'PUT': #UPDATE
+#        serializer_class = OrganizacjaSerializer(organizacja, data=request.data)
+#        if serializer_class.is_valid():
+#            serializer_class.save() #Update table in db
+#            return Response(serializer_class.data)
+#        return Response(serializer_class.errors, status=400) #Bad request
+#    elif request.method == 'DELETE':
+#        organizacja.delete()
+#        return Response(status=204)
 
 
 def pomiary(request):
