@@ -17,6 +17,7 @@ router.register(r'logipomiarowe', views.LogPomiarowyViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+
 ]
 
 #urlpatterns = [
