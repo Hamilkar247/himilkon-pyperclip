@@ -1,0 +1,19 @@
+<!-- templates/front/organizacje/html -->
+{% extends 'front/base.html' %}
+
+{% block title %} Pomiary {% endblock %}
+
+{% block content %}
+{% if pomiary_list %}
+    <ul>
+    {% for pomiary in pomiary_list %}
+         <li><a href="/front/pomiary/{{ pomiary.id }}">
+             id:{{pomiary.id}} czyWazny:{{pomiary.opis}} wartosc:{{pomiary.wartosc}}
+         </a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Brak organizacji w bazie danych</p>
+{% endif %}
+
+{% endblock %}

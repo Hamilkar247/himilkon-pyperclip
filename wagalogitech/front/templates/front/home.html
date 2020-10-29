@@ -1,4 +1,4 @@
-<!-- templates/front/homex.html -->
+<!-- templates/front/home.html -->
 {% extends 'front/base.html' %}
 
 {% block title%}Home{% endblock %}
@@ -6,6 +6,9 @@
 {% block content %}
 {% if user.is_authenticated %}
    Hi {{ user.username }}!
+   <p><a href="/front/organizacje/">Twoje organizacje</a></p>
+   <p><a href="/front/pomiary/">Twoje pomiary</a></p>
+   <button class="btn btn-primary btn-sm">przycisk o nie okreslonym celu</button>
    <p><a href="{% url 'logout' %}">Log Out</a></p>
 {% else %}
    <p>You are not logged</p>

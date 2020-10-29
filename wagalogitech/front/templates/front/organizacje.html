@@ -1,3 +1,9 @@
+<!-- templates/front/organizacje.html -->
+{% extends 'front/base.html' %}
+
+{% block title %} Organizacje {% endblock %}
+
+{% block content %}
 {% if organizacje_list %}
     <ul>
     {% for organizacja in organizacje_list %}
@@ -9,3 +15,5 @@
 {% else %}
     <p>Brak organizacji w bazie danych</p>
 {% endif %}
+
+{% endblock %}
