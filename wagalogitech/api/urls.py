@@ -16,7 +16,7 @@ router.register(r'seriepomiarowe', views.SeriaPomiarowaViewSet)
 router.register(r'logipomiarowe', views.LogPomiarowyViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]
 
 #urlpatterns = [

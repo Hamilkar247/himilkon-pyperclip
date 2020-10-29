@@ -4,6 +4,7 @@ from rest_framework import permissions, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.views import APIView
 
 from .models import (
 
@@ -48,6 +49,11 @@ class OrganizacjaViewSet(viewsets.ModelViewSet):
     queryset = Organizacja.objects.all()  # filter(id=1)
     serializer_class = OrganizacjaSerializer
 
+
+class Get_organization_List(APIView):
+    def get(self, request):
+        organizacje = Organizacja.objects.all()
+        serializer_class = OrganizacjaSerializer
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
