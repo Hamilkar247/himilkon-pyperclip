@@ -2,7 +2,7 @@ from datetime import timezone
 
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import (
+from core.models import (
     Organizacja,
     Pomiar, SesjaUzytkownika, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa,
 )
