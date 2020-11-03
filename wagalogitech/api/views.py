@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 
-from wagalogitech.core.models import Pomiar, LogPomiarowy, LogAdministracyjny \
+from core.models import Pomiar, LogPomiarowy, LogAdministracyjny \
     , SeriaPomiarowa, Organizacja, SesjaUzytkownika
 from .permissions import IsOwnerOrReadOnly
 from .serializers import (
