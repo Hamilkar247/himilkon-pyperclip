@@ -1,7 +1,7 @@
 from django.forms import forms
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404
-from api.models import Organizacja, Pomiar
+from core.models import Organizacja, Pomiar
 
 # Create your views here.
 from django.template import loader
