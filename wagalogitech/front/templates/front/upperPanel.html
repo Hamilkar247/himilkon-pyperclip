@@ -1,0 +1,15 @@
+{% extends 'front/base.html' %}
+
+{% block content %}
+
+<p> <h1>Jesteś zalogowany jako {{ user.username }}</h1>
+<form action="/">
+      <input class="btn btn-primary btn-sm" type="submit" value="Panel Główny" />
+</form>
+
+<form action="{% url 'logout' %}">
+      <input class="btn btn-primary btn-sm" type="submit" value="Wyloguj" />
+</form>
+<button type="button" onclick="window.location.reload();">Refresh Page</button>
+</p>
+{% endblock %}
