@@ -130,4 +130,4 @@ def szczegoly(request, organizacja_id):
 
 
 def upperPanel(request):
-    return render(request, "front/upperPanel.html")
+    return render(request, "front/leftPanel.html")
