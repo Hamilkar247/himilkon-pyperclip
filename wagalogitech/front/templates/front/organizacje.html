@@ -1,11 +1,11 @@
 <!-- templates/front/organizacje.html -->
-{% extends 'front/base.html' %}
+{% extends 'front/raw.html' %}
 
 {% block title %} Organizacje {% endblock %}
 
 
-{% block content %}
-  {% include 'front/upperPanel.html' %}
+{% block authenticated %}
+
 
   <button type="button" class="btn-primary btn-sm"
           onclick="document.getElementById('demo').innerHTML = Date()">Click me to display Date and Time</button>
@@ -30,4 +30,4 @@
   {% load static %}
   <script src='{% static "js/organizacje.js" %}' type="text/javascript"></script>
 
-{% endblock content%}
+{% endblock authenticated %}

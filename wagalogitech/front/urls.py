@@ -12,5 +12,5 @@ urlpatterns = [
     path('pomiary/', views.pomiary, name="pomiary"),
 #    path('post/ajax/pomiar', postPomiar, name="post_pomiar"),
     path('pomiary/<int:pomiary_id>', views.pomiary_detail, name="pomiary"),
-    path('upperPanel', views.upperPanel, name="upperPanel")
+    path('leftPanel', views.leftPanel, name="leftPanel")
 ]

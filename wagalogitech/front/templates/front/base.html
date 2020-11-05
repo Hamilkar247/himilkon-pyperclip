@@ -1,4 +1,4 @@
-<!-- templates/front/basex.html -->
+<!-- templates/front/base.html -->
 <!DOCTYPE html>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'inspinia/css/bootstrap.css' %}">
@@ -16,7 +16,10 @@
 </head>
 <body>
    <main>
+
        {% block content %}
+              {% include 'front/leftPanel.html' %}
+
        {% endblock %}
 
        {% block javascript %}
