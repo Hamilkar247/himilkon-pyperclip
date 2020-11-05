@@ -2,6 +2,7 @@
 {% extends 'front/base.html' %}
 
 {% block content %}
+
   {% if user.is_authenticated %}
       {% include 'front/leftPanel.html' %}
       {% block authenticated %}
