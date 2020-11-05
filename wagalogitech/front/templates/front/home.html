@@ -15,41 +15,41 @@
    <p><a href="/front/pomiary/">Twoje pomiary</a></p>
    <button class="btn btn-primary btn-sm">przycisk o nie okreslonym celu</button>
    <p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-   <p>You are not logged</p>
-   <p> Hej! </p>
-   <a href="{% url 'login' %}">Log In</a>
-{% endif %}
+   {% else %}
+      <p>You are not logged</p>
+      <p> Hej! </p>
+      <a href="{% url 'login' %}">Log In</a>
+   {% endif %}
 
-<table class="table table-bordered">
-     <thead>
-     <tr>
-         <th>#</th>
-         <th>First Name</th>
-         <th>Last Name</th>
-         <th>Username</th>
-     </tr>
-     </thead>
-     <tbody>
-     <tr>
-         <td>1</td>
-         <td>Mark</td>
-         <td>Otto</td>
-         <td>@mdo</td>
-     </tr>
-     <tr>
-         <td>2</td>
-         <td>Jacob</td>
-         <td>Thornton</td>
-         <td>@fat</td>
-     </tr>
-     <tr>
-         <td>3</td>
-         <td>Larry</td>
-         <td>the Bird</td>
-         <td>@twitter</td>
-     </tr>
-     </tbody>
- </table>
+   <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
 
 {% endblock content %}
