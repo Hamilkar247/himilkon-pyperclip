@@ -4,21 +4,7 @@
 {% block title %} Organizacje {% endblock %}
 
 {% block content %}
-{% if organizacje_list %}
-    <ul>
-    {% for organizacja in organizacje_list %}
-         <li><a href="/front/organizacje/{{ organizacja.id }}">
-             nazwa:{{organizacja.nazwa}} opis:{{organizacja.opis}}
-         </a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Brak organizacji w bazie danych</p>
-{% endif %}
 
-<div>
-<button class="btn-primary btn-sm">Click Me</button>
-</div>
 <button type="button" class="btn-primary btn-sm"
         onclick="document.getElementById('demo').innerHTML = Date()">Click me to display Date and Time</button>
 <button type="button" onclick="changeParagraph()">Try it change paragraph</button>
@@ -26,26 +12,15 @@
 <p id="demo"></p>
 <p id="paragraphId">A Paragraph.</p>
 
-
-
-<div id="jsonresp" style="margin-top: 100px"</p>
-    <p><label>Nazwa Organizacji: :</label> <span id="nazwa"></span></p>
-    <p><label>Opis Organizacji: :</label> <span id="opis"></span></p>
-</div>
-
 <p id="hideclick">If you click on me, I will disappear.</p>
-
-<button id="przycisk">Daj zewnetrzny kontekst </button>
-
-<div id="div1"><h2> Pozwól jQuery AJAX to change this text
-</h2></div>
 
 <table id="mytable" class="table table-bordered">
     <thead>
     <tr>
         <th>#id</th>
         <th>Nazwa</th>
-        <th>opis</th>
+        <th>Opis</th>
+        <th>Szczegóły</th>
         <!-- <th>User</th> ZAPEWNE DO DODANIA W PRZYSZLOSCI -->
     </tr>
     </thead>
