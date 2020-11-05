@@ -127,3 +127,7 @@ def szczegoly(request, organizacja_id):
 #        if form.is_valid():
 #            cd = form.cleaned_data
 #            a = cd.get('a')
+
+
+def upperPanel(request):
+    return render(request, "front/upperPanel.html")

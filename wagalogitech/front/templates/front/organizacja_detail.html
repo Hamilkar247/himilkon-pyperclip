@@ -4,11 +4,11 @@
 {% block title %} Organizacja szczegóły {% endblock %}
 
 {% block content %}
-{% if organizacja.nazwa %}
-<p>Nazwa: {{ organizacja.nazwa }}</p>
-<p>Opis: {{ organizacja.opis }}</p>
-{% else %}
-  <p>Brak organizacji w bazie danych o tym id !</p>
-{% endif %}
+  {% if organizacja.nazwa %}
+  <p>Nazwa: {{ organizacja.nazwa }}</p>
+  <p>Opis: {{ organizacja.opis }}</p>
+  {% else %}
+    <p>Brak organizacji w bazie danych o tym id !</p>
+  {% endif %}
 
 {% endblock %}

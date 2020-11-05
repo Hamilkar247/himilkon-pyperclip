@@ -4,11 +4,11 @@
 {% block title %} Pomiary szczegóły {% endblock %}
 
 {% block content %}
-{% if pomiary.nazwa %}
-<p>Nazwa: {{ pomiary.nazwa }}</p>
-<p>Opis: {{ pomiary.opis }}</p>
-{% else %}
-  <p>Brak pomiary w bazie danych o tym id !</p>
-{% endif %}
+  {% if pomiary.nazwa %}
+  <p>Nazwa: {{ pomiary.nazwa }}</p>
+  <p>Opis: {{ pomiary.opis }}</p>
+  {% else %}
+    <p>Brak pomiary w bazie danych o tym id !</p>
+  {% endif %}
 
 {% endblock %}
