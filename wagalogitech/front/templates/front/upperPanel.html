@@ -17,7 +17,7 @@
 {% endblock style %}
 {% block content %}
   <p>Jesteś zalogowany jako {{ user.username }}</p>
-  <div class="flex-container">
+  <div style='width:100%;' class="row">
     <div>
     <form action="/">
           <input class="btn btn-primary btn-sm" type="submit" value="Panel Główny" />
@@ -31,7 +31,8 @@
     </div>
     <div>
         <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+        <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+        <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
     </div>
-  </div>
-
+   </div>
 {% endblock %}
