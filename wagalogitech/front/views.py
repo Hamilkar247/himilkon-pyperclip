@@ -129,5 +129,5 @@ def szczegoly(request, organizacja_id):
 #            a = cd.get('a')
 
 
-def upperPanel(request):
-    return render(request, "front/upperPanel.html")
+def leftPanel(request):
+    return render(request, "front/leftPanel.html")

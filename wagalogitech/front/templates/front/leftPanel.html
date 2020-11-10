@@ -1,0 +1,26 @@
+<!-- templates/front/leftPanel.html -->
+{% extends 'front/base.html' %}
+{% block style %}
+
+{% endblock style %}
+{% block content %}
+  <p>Jesteś zalogowany jako {{ user.username }}</p>
+  <div style='width:100%;' class="row">
+    <div>
+    <form action="/">
+          <input class="btn btn-primary btn-sm" type="submit" value="Panel Główny" />
+    </form>
+    </div>
+
+    <div>
+    <form action="{% url 'logout' %}">
+          <input class="btn btn-primary btn-sm" type="submit" value="Wyloguj" />
+    </form>
+    </div>
+    <div>
+        <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+        <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+        <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+    </div>
+   </div>
+{% endblock %}
