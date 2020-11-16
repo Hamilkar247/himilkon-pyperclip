@@ -22,5 +22,32 @@
         <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
         <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
     </div>
-   </div>
+  </div>
+<!--
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li>
+                         <form action="/">
+                               <input class="btn btn-primary btn-sm" type="submit" value="Panel Główny" />
+                         </form>
+                        </li>
+                        <li>
+                         <form action="{% url 'logout' %}">
+                               <input class="btn btn-primary btn-sm" type="submit" value="Wyloguj" />
+                         </form>
+                        </li>
+                        <li><button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button></li>
+                        <li> <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button></li>
+                        <li> <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+-->
 {% endblock %}
