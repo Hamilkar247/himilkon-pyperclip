@@ -1,5 +1,5 @@
 function changeParagraph() {
-  console.log("Juzue")
+  console.log("Juzue");
   document.getElementById("paragraphId").innerHTML = "static/js/Paragraph changed.";
 }
 
@@ -10,8 +10,18 @@ function refreshPage() {
 //testowa funkcja jquery
 $(document).ready(function(){
   $("#hideclick").click(function(){
-    $(this).hide();
+    $("#hideclick").hide();
+    console.log("znikniecie paragrafu hideclick");
   })
+ console.log("zaladowano funkcje paragrafu hideclick");
+})
+
+$(document).ready(function(){
+  $("#button-3-kreski").click(function(){
+    console.log("znikniecie left-panela")
+    $("#leftPanel").hide();
+  })
+  console.log("funkcja znikania left panela")
 })
 
 //testowa funkcja ajaxa - jak wstawić ?
@@ -63,4 +73,14 @@ $( document ).ready(function() {
 //    zlecone_badanie_id = obj.getAttribute('data-id')
 //    console.log()
 //    location.href=='/admin/Procedura/etap_probka/add/?zlecone_badanie='+zlecone_badanie_id
+//}
+
+
+//$(document).ready(function()){
+//  $("#butt").click(function(){
+//    //$("#leftPanel").hide();
+//    $("#hideclick").hide();
+//    $(this).hide();
+//  })
+//  console.log("schowano left panel")
 //}

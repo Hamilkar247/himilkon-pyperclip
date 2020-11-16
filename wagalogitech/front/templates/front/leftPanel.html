@@ -5,22 +5,28 @@
 {% endblock style %}
 {% block content %}
   <p>Jesteś zalogowany jako {{ user.username }}</p>
-  <div style='width:100%;' class="row">
-    <div>
-    <form action="/">
-          <input class="btn btn-primary btn-sm" type="submit" value="Panel Główny" />
-    </form>
-    </div>
+   <div id="button-3-kreski">
+   <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+   </div>
+  <div id="leftPanel">
+    <div style='width:100%;' class="row">
+        <i class="fa fa-bars">przycisk</i>
+      <div>
+      <form action="/">
+            <input class="btn btn-primary btn-sm" type="submit" value="Panel Główny" />
+      </form>
+      </div>
 
-    <div>
-    <form action="{% url 'logout' %}">
-          <input class="btn btn-primary btn-sm" type="submit" value="Wyloguj" />
-    </form>
-    </div>
-    <div>
-        <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
-        <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
-        <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+      <div>
+      <form action="{% url 'logout' %}">
+            <input class="btn btn-primary btn-sm" type="submit" value="Wyloguj" />
+      </form>
+      </div>
+      <div>
+          <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+          <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+          <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+      </div>
     </div>
   </div>
 <!--
