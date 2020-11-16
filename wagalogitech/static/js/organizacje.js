@@ -19,7 +19,7 @@ $(document).ready(function(){
 $(document).ready(function(){
   $("#button-3-kreski").click(function(){
     console.log("znikniecie left-panela")
-    $("#leftPanel").hide();
+    $("#leftPanel").toggle();
   })
   console.log("funkcja znikania left panela")
 })
