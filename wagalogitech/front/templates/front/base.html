@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <title>{% block title %}Django Auth Tutorial {% endblock %}</title>
     <!-- <link href='{@ static "inspinia/css/bootstrap.css" @}' rel='stylesheet'> -->
-    {% block styles %}
+
         <link rel="stylesheet" type="text/css" href="{% static 'front/style.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'inspinia/css/bootstrap.css' %}">
         <link href="{% static 'inspinia/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
@@ -25,6 +25,7 @@
                overflow-x: hidden;
             }
         </style>
+    {% block styles %}
     {% endblock styles %}
 </head>
 <body>

@@ -1,33 +1,42 @@
 <!-- templates/front/leftPanel.html -->
 {% extends 'front/base.html' %}
 {% load static %}
-{% block style %}
-{% endblock style %}
+
+{% block styles %}
+   <style>
+       #leftPanel {
+         padding-left: 10px;
+       }
+       div.inside-left-panel {
+         border: 1px solid #4CAF50;
+         padding: 10px;
+       }
+   </style>
+{% endblock styles %}
 {% block content %}
-  <p>Jesteś zalogowany jako {{ user.username }}</p>
+  <div id="button-3-kreski">
+    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+  </div>
   <div id="leftPanel">
-    <div style='width:100%;' class="row">
-        <i class="fa fa-bars">przycisk</i>
-      <div>
+
+    <div class="row">
+      <div class="inside-left-panel">
       <form action="/">
             <input class="btn btn-primary btn-sm" type="submit" value="Panel Główny" />
       </form>
       </div>
-
-      <div>
+      <div class="inside-left-panel">
       <form action="{% url 'logout' %}">
             <input class="btn btn-primary btn-sm" type="submit" value="Wyloguj" />
       </form>
       </div>
-      <div>
-          <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
-          <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+      <div class="inside-left-panel">
           <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
       </div>
+      <div  class="inside-left-panel">
+          <p>Jesteś zalogowany jako {{ user.username }}</p>
+      </div>
     </div>
-  </div>
-  <div id="button-3-kreski">
-    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
   </div>
   <script src='{% static "js/leftPanel.js" %}' type="text/javascript"></script>
 {% endblock content %}
