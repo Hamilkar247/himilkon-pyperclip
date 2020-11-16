@@ -131,3 +131,7 @@ def szczegoly(request, organizacja_id):
 
 def leftPanel(request):
     return render(request, "front/leftPanel.html")
+
+
+def przyklad(request):
+    return render(request, "front/przyklad.html")
