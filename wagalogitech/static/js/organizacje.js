@@ -16,13 +16,7 @@ $(document).ready(function(){
  console.log("zaladowano funkcje paragrafu hideclick");
 })
 
-$(document).ready(function(){
-  $("#button-3-kreski").click(function(){
-    console.log("znikniecie left-panela")
-    $("#leftPanel").toggle();
-  })
-  console.log("funkcja znikania left panela")
-})
+
 
 //testowa funkcja ajaxa - jak wstawić ?
 //$(document).ready(function(){
