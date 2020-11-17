@@ -1,9 +1,9 @@
 <!-- templates/front/organizacja_detail.html -->
-{% extends 'front/base.html' %}
+{% extends 'front/raw.html' %}
 
 {% block title %} Organizacja szczegóły {% endblock %}
 
-{% block content %}
+{% block authenticated %}
   {% if organizacja.nazwa %}
   <p>Nazwa: {{ organizacja.nazwa }}</p>
   <p>Opis: {{ organizacja.opis }}</p>
@@ -11,4 +11,4 @@
     <p>Brak organizacji w bazie danych o tym id !</p>
   {% endif %}
 
-{% endblock content %}
+{% endblock authenticated %}

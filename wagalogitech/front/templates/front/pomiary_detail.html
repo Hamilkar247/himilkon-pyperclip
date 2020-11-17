@@ -1,9 +1,8 @@
 <!-- templates/front/pomiary_detail.html -->
-{% extends 'front/base.html' %}
-
+{% extends 'front/raw.html' %}
+{% load static %}
 {% block title %} Pomiary szczegóły {% endblock %}
-
-{% block content %}
+{% block authenticated %}
   {% if pomiar.id %}
   <p>id: {{ pomiar.id }}</p>
   <p>owner: {{ pomiar.owner }}</p>
@@ -14,4 +13,4 @@
     <p>Brak pomiary w bazie danych o tym id !</p>
   {% endif %}
 
-{% endblock content %}
+{% endblock authenticated %}
