@@ -2,8 +2,18 @@
 {% extends 'front/raw.html' %}
 {% block title%}Home{% endblock %}
 {% block authenticated %}
+   <div class="ibox">
+      <div class="ibox-title">
+         <h5>
+            "Panele do obejrzenia"
+         </h5>
+      </div>
+   </div>
+   <div class="ibox-content" style>
+      <div class="col-sm-4 col-sm-offset-2">
+             <a href="/front/organizacje/" class="btn btn-w-m btn-success">Twoje organizacje</a>
+             <a href="/front/pomiary/" class="btn btn-w-m btn-success">Twoje pomiary</a>
+      </div>
+   </div>
 
-   <p><a href="/front/organizacje/">Twoje organizacje</a></p>
-   <p><a href="/front/pomiary/">Twoje pomiary</a></p>
-   <p><a href="{% url 'logout' %}">Log Out</a></p>
 {% endblock authenticated %}
