@@ -15,9 +15,6 @@ $(document).ready(function(){
   })
  console.log("zaladowano funkcje paragrafu hideclick");
 })
-
-
-
 //testowa funkcja ajaxa - jak wstawić ?
 //$(document).ready(function(){
 //  $("#przycisk").click(function(){
@@ -28,6 +25,8 @@ $(document).ready(function(){
 //  })
 //})
 
+
+//uzupelnianie liste organizacji
 $( document ).ready(function() {
 
     //console.log(window.location.href)
@@ -59,6 +58,11 @@ $( document ).ready(function() {
    }).fail(function() {
      alert("Wystapil blad w polaczeniu z djangorestapi!");
    })
+})
+
+//wartosci z bazy danych pewnej organizacji
+$(document).ready(function(){
+   console.log("")
 })
 
 //to nie wiem co u tomka za bardzo za co odpowiada
