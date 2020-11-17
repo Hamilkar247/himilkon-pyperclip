@@ -42,15 +42,14 @@ $( document ).ready(function() {
    }).done(function (response) {
        for(i=0; i<response.length; i++){
            console.log(response[i].id)
+            console.log('<a href="/front/organizacje/' + response[i].id + '" class="btn btn-w-m btn-success"  >' + response[i].nazwa + '</a>');
            $('#mytable').append(
            '<tr>' +
                '<td>' + response[i].id + '</td>' +
                '<td>' + response[i].nazwa + '</td>' +
                '<td>' + response[i].opis + '</td>' +
                '<td>' +
-               '<form action="/front/organizacje/' + response[i].id +  '" >' +
-               '<input class="btn btn-primary btn-sm" type="submit" + value=' + response[i].nazwa +'/>' +
-               '</form>' +
+                 '  <a href="/front/organizacje/' + response[i].id + '" class="btn btn-w-m btn-success">' + response[i].nazwa + '</a>' +
                '</td>' +
                //'<td><button id="btn_organizacja_'+response[i].id+'" class="btn btn-w-m btn-success"
                //onclick="buttonFunction(this)" data-id="'+response[i].id+'">Utwórz organizacje</button>'+
