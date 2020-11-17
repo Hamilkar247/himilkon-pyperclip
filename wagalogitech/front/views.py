@@ -106,7 +106,7 @@ def pomiary(request):
 
 def pomiary_detail(request, pomiar_id):
     pomiar = get_object_or_404(Pomiar, pk=pomiar_id)
-    return render(request, "front/pomiar_detail.html", {'pomiar': pomiar})
+    return render(request, "front/pomiary_detail.html", {'pomiar': pomiar})
 
 
 def szczegoly(request, organizacja_id):

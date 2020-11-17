@@ -16,9 +16,6 @@ $(document).ready(function(){
               '<td>' + response[i].data_pomiaru + '</td>' +
               '<td>' +
                  '  <a href="/front/pomiary/' + response[i].id + '" class="btn btn-primary btn-sm">' + response[i].id + '</a>' +
-                 '  <form action="/front/pomiary/"' + response[i].id + '" >' +
-                 '     <input class="btn btn-primary btn-sm" type="submit" + value=' + response[i].id + '/>' +
-                 '  </form>' +
               '</td>' +
            '</tr>');
       }
