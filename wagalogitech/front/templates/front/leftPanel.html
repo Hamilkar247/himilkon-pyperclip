@@ -14,26 +14,22 @@
    </style>
 {% endblock styles %}
 {% block content %}
-  <div id="button-3-kreski">
+  <div id="button-3-kreski"  data-animation="fadeInDownBig">
     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
   </div>
   <div id="leftPanel">
 
     <div class="row">
       <div class="inside-left-panel">
-      <form action="/">
-            <input class="btn btn-primary btn-sm" type="submit" value="Panel Główny" />
-      </form>
+          <a href="/" class="btn btn-primary btn-sm">Panel Główny</a>
       </div>
       <div class="inside-left-panel">
-      <form action="{% url 'logout' %}">
-            <input class="btn btn-primary btn-sm" type="submit" value="Wyloguj" />
-      </form>
+         <a href="{% url 'logout' %}" class="btn btn-primary btn-sm">Wyloguj</a>
       </div>
       <div class="inside-left-panel">
-          <button type="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</button>
+         <a href="#" class="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</a>
       </div>
-      <div  class="inside-left-panel">
+      <div class="inside-left-panel">
           <p>Jesteś zalogowany jako {{ user.username }}</p>
       </div>
     </div>
