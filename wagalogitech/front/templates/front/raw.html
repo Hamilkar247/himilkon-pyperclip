@@ -9,8 +9,10 @@
       {% endblock authenticated %}
   {% else %}
       {% block unauthenticated %}
+    <div class="ibox-content" style>
            <p>Nie jesteś zalogowany!</p>
-           <a href="{% url 'logout' %}">Log In</a>
+           <a href="{% url 'logout' %}" class="btn btn-w-m btn-success">Zaloguj się !</a>
+    </div>
       {% endblock unauthenticated %}
   {% endif %}
 
