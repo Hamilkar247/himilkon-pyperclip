@@ -1,14 +1,18 @@
 <!-- templates/front/pomiary_detail.html -->
-{% extends 'front/base.html' %}
-
+{% extends 'front/raw.html' %}
 {% block title %} Pomiary szczegóły {% endblock %}
+{% block authenticated %}
+  <div class="ibox-content" style>
 
-{% block content %}
-  {% if pomiary.nazwa %}
-  <p>Nazwa: {{ pomiary.nazwa }}</p>
-  <p>Opis: {{ pomiary.opis }}</p>
-  {% else %}
-    <p>Brak pomiary w bazie danych o tym id !</p>
-  {% endif %}
+    {% if pomiar.id %}
+    <p>id: {{ pomiar.id }}</p>
+    <p>owner: {{ pomiar.owner }}</p>
+    <p>czyWazny: {{ pomiar.czyWazny }}</p>
+    <p>wartosc: {{ pomiar.wartosc }}</p>
+    <p>czyWazny: {{ pomiar.data_pomiaru }}</p>
+    {% else %}
+      <p>Brak pomiary w bazie danych o tym id !</p>
+    {% endif %}
 
-{% endblock %}
+  </div>
+{% endblock authenticated %}

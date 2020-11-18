@@ -2,6 +2,10 @@ li a {
    color: red;
 }
 
+table.mytable {
+    color: white;
+}
+
 body {
     background: white
     /*url("images/background.png") no-repeat;*/

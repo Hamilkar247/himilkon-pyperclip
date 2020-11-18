@@ -78,38 +78,35 @@ def organizacja_detail(request, organizacja_id):
 
 
 def pomiary(request):
-    form = PomiarForm()
-    pomiary_list = Organizacja.objects.all()
+    pomiary_list = Pomiar.objects.all()
     template = loader.get_template('front/pomiary.html')
     context = {
-        'form': form,
         'pomiary_list': pomiary_list,
     }
-    return render(request, template, context)
+    return render(request, 'front/pomiary.html', context)
 
-
-def postPomiar(request):
-    #request should be ajax and method should be POST
-    if request.is_ajax and request.method == "POST":
-        #get the form data
-        form = PomiarForm(request.POST)
-        #save the data and after fetch the object in instance
-        if form.is_valid():
-            instance = form.save()
-            #serialize in new pomiar object in json
-            ser_instance = serializers.serialize('json', [ instance, ])
-            # send to client side
-            return JsonResponse({"instance": ser_instance}, status=200)
-        else:
-            # some form errors occured.
-            return JsonResponse({"error": form.errors}, status=400)
-    #some error occured
-    return JsonResponse({"error": ""}, status=400)
+#def postPomiar(request):
+#    #request should be ajax and method should be POST
+#    if request.is_ajax and request.method == "POST":
+#        #get the form data
+#        form = PomiarForm(request.POST)
+#        #save the data and after fetch the object in instance
+#        if form.is_valid():
+#            instance = form.save()
+#            #serialize in new pomiar object in json
+#            ser_instance = serializers.serialize('json', [ instance, ])
+#            # send to client side
+#            return JsonResponse({"instance": ser_instance}, status=200)
+#        else:
+#            # some form errors occured.
+#            return JsonResponse({"error": form.errors}, status=400)
+#    #some error occured
+#    return JsonResponse({"error": ""}, status=400)
 
 
 def pomiary_detail(request, pomiar_id):
     pomiar = get_object_or_404(Pomiar, pk=pomiar_id)
-    return render(request, "front/pomiar_detail.html", {'pomiar': pomiar})
+    return render(request, "front/pomiary_detail.html", {'pomiar': pomiar})
 
 
 def szczegoly(request, organizacja_id):
@@ -131,3 +128,7 @@ def szczegoly(request, organizacja_id):
 
 def leftPanel(request):
     return render(request, "front/leftPanel.html")
+
+
+def przyklad(request):
+    return render(request, "front/przyklad.html")
