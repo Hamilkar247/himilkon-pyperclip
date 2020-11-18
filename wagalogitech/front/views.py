@@ -15,11 +15,6 @@ def home(request):
     return render(request, 'front/home.html')
 
 
-def login(request):
-    template = loader.get_template('front/login.html')
-    return render(request, 'front/login.html')
-
-
 def logout(request):
     return HttpResponse("Logout")
 
