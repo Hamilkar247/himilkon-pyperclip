@@ -10,9 +10,9 @@ def front_root(request):
     return HttpResponse("Waga - LOGITECH")
 
 
-def home(request):
-    template = loader.get_template('front/home.html')
-    return render(request, 'front/home.html')
+def kokpit(request):
+    template = loader.get_template('front/kokpit.html')
+    return render(request, 'front/kokpit.html')
 
 
 def logout(request):
