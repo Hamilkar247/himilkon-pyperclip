@@ -5,32 +5,34 @@
 {% block styles %}
    <style>
        #leftPanel {
-         padding-left: 10px;
+         /*padding-left: 10px;*/
        }
        div.inside-left-panel {
-         border: 1px solid #4CAF50;
+         /*border: 1px solid #4CAF50;*/
          padding: 10px;
        }
    </style>
 {% endblock styles %}
 {% block content %}
-  <div id="button-3-kreski"  data-animation="fadeInDownBig">
-    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-  </div>
-  <div id="leftPanel">
+  <div class="ibox-content" style>
+    <div id="button-3-kreski"  data-animation="fadeInDownBig">
+      <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+    </div>
+    <div id="leftPanel">
 
-    <div class="row">
-      <div class="inside-left-panel">
-          <a href="/" class="btn btn-primary btn-sm">Panel Główny</a>
-      </div>
-      <div class="inside-left-panel">
-         <a href="{% url 'logout' %}" class="btn btn-primary btn-sm">Wyloguj</a>
-      </div>
-      <div class="inside-left-panel">
-         <a href="#" class="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</a>
-      </div>
-      <div class="inside-left-panel">
-          <p>Jesteś zalogowany jako {{ user.username }}</p>
+      <div class="row">
+        <div class="inside-left-panel">
+            <a href="/" class="btn btn-primary btn-sm">Panel Główny</a>
+        </div>
+        <div class="inside-left-panel">
+           <a href="{% url 'logout' %}" class="btn btn-primary btn-sm">Wyloguj</a>
+        </div>
+        <div class="inside-left-panel">
+           <a href="#" class="btn btn-primary btn-sm" onclick="window.location.reload();">Refresh Page</a>
+        </div>
+        <div class="inside-left-panel">
+            <p>Jesteś zalogowany jako {{ user.username }}</p>
+        </div>
       </div>
     </div>
   </div>
