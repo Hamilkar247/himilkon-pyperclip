@@ -47,6 +47,10 @@ class OrganizacjaViewSet(viewsets.ModelViewSet):
     queryset = Organizacja.objects.all()  # filter(id=1)
     serializer_class = OrganizacjaSerializer
 
+    def post(self, request):
+        print("cokolwiek")
+
+
 
 class Get_organization_List(APIView):
     def get(self, request):
