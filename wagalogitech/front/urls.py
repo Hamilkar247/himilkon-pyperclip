@@ -5,8 +5,8 @@ from . import views
 
 urlpatterns = [
     path('front_root', views.front_root, name='front_root'),
-    path('home', views.home, name="login"),
-    path('', views.home, name="login"),
+    path('kokpit', views.kokpit, name="kokpit"),
+    path('', views.kokpit, name="login"),
     path('organizacje/', views.organizacje, name="organizacje"),
     path('organizacje/<int:organizacja_id>', views.organizacja_detail, name="organizacja_detail"),
     path('pomiary/', views.pomiary, name="pomiary"),
