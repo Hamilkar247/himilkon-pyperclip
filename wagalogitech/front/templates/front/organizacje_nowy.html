@@ -11,7 +11,7 @@
       </h5>
     </div>
     <div class="ibox-content" style>
-      <form method="get">
+      <form id="form_zapisorg" >
         <div class="form-group  row">
           <label class="col-sm-2 col-form-label">Nazwa</label>
           <div class="col-sm-10">
@@ -22,14 +22,14 @@
         <div class="form-group  row">
           <label class="col-sm-2 col-form-label">Opis</label>
           <div class="col-sm-10">
-            <input id="opis_organizacji" type="text" class="form-control">
+            <input id="opis_organizacji" type="text" data-id_org="das" class="form-control">
           </div>
         </div>
         <div class="hr-line-dashed"></div>
         <div class="form-group  row">
           <div class="col-sm-4 col-sm-offset-2">
-            <a href="/front/organizacje/" class="btn btn-white btn-sm">Anuluj</a>
-            <a href="#" id="ZapiszOrganizacje" class="btn btn-primary btn-sm">Zapisz organizacje w bazie</a>
+            <!--<a href="/front/organizacje/" class="btn btn-white btn-sm">Anuluj</a> -->
+            <button id="ZapiszOrganizacje" type="submit" class="btn btn-primary btn-sm">Zapisz organizacje w bazie</button>
           </div>
         </div>
       </form>
