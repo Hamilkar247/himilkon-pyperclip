@@ -17,7 +17,7 @@ router.register(r'logipomiarowe', views.LogPomiarowyViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-
+    path('organizacje/dodaj', views.dodajOrganizacje, name="dodajOrganizacje"),
 ]
 
 #urlpatterns = [

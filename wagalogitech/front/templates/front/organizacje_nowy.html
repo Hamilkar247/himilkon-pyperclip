@@ -11,7 +11,8 @@
       </h5>
     </div>
     <div class="ibox-content" style>
-      <form id="form_zapisorg" >
+      <form id="form_zapisorg" method="post">
+        {% csrf_token %}
         <div class="form-group  row">
           <label class="col-sm-2 col-form-label">Nazwa</label>
           <div class="col-sm-10">
@@ -35,5 +36,6 @@
       </form>
     </div>
   </div>
+
   <script src='{% static "js/organizacja_nowy.js" %}' type="text/javascript"></script>
 {% endblock authenticated %}
