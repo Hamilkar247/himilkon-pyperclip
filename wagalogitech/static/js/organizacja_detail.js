@@ -1,8 +1,11 @@
 //wartosci z bazy danych pewnej organizacji
 $(document).ready(function(){
-   console.log("jestesmy w szczegolach organizacji"),
+   console.log("jestesmy w szczegolach organizacji")
+   let searchParams = $(location).attr('href')//w vanilii JS to jestwindow.location.href
+   let destinationURL = searchParams.replace("front", "api")
+   console.log("current url:" + destinationURL)
    $.ajax({
-      url: "http://127.0.0.1:8000/api/organizacje/1", //do poprawienia !!!
+      url: destinationURL, //do poprawienia !!!
       type: "GET",
    }).done(function(response) {
        console.log("udalo sie pobrac z ajaksa dane !")
