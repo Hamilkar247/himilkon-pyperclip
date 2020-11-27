@@ -1,13 +1,17 @@
 # Create your views here.
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
+from django.shortcuts import redirect
 
 from core.models import Pomiar, LogPomiarowy, LogAdministracyjny \
     , SeriaPomiarowa, Organizacja, SesjaUzytkownika
+
 from .permissions import IsOwnerOrReadOnly
 from .serializers import (
 
@@ -47,11 +51,22 @@ class OrganizacjaViewSet(viewsets.ModelViewSet):
     queryset = Organizacja.objects.all()  # filter(id=1)
     serializer_class = OrganizacjaSerializer
 
+    def post(self, request):
+        print("cokolwiek")
+
 
 class Get_organization_List(APIView):
     def get(self, request):
         organizacje = Organizacja.objects.all()
         serializer_class = OrganizacjaSerializer
+
+
+@csrf_exempt # w przyszlosci trzeba znalezc inny sposób - to nie jest zbyt zalecane
+def dodajOrganizacje(request):
+    organizacje = Organizacja(nazwa=request.POST['nazwa'], opis=request.POST['opis'])
+    organizacje.save()
+    return redirect('/')
+
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
