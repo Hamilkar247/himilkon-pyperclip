@@ -3,6 +3,8 @@
 {% load static %}
 {% block title %} Organizacje {% endblock %}
 {% block authenticated %}
+  {{ block.super }}
+  <!-- authenticated - organizacja.html -->
   <div class="ibox-content" style>
     <div class="col-sm-4 col-sm-offset-2">
       <button type="button" class="btn-primary btn-sm"
@@ -19,7 +21,7 @@
         <thead>
         <tr>
             <th>#id</th>
-            <th>Nazwa</th>
+            <th class="sorting" >Nazwa</th>
             <th>Opis</th>
             <th>Szczegóły</th>
             <!-- <th>User</th> ZAPEWNE DO DODANIA W PRZYSZLOSCI -->
@@ -28,5 +30,12 @@
     </table>
     <a href="/front/organizacje/nowy" class="btn btn-w-m btn-success">Dodaj nową organizację</a>
   </div>
-  <script src='{% static "js/organizacje.js" %}' type="text/javascript"></script>
-{% endblock %}
+
+{% endblock authenticated %}
+{% block scripts %}
+  {% if user.is_authenticated %}
+    {{ block.super }}
+    <!-- scripts - or  ganizacje.html -->
+    <script src='{% static "js/organizacje.js" %}' type="text/javascript"></script>
+  {% endif %}
+{% endblock scripts   %}

@@ -3,6 +3,7 @@
 {% load static %}
 {% block title %} Organizacja szczegóły {% endblock %}
 {% block authenticated %}
+  {{ block.super }}
   <div class="ibox">
     <div class="ibox-title">
       <h5>
@@ -35,11 +36,9 @@
       </form>
     </div>
   </div>
-  {% if organizacja.nazwa %}
-  <p>Nazwa: {{ organizacja.nazwa }}</p>
-  <p>Opis: {{ organizacja.opis }}</p>
-  {% else %}
-    <p>Brak organizacji w bazie danych o tym id !</p>
-  {% endif %}
-  <script src='{% static "js/organizacja_detail.js" %}' type="text/javascript"></script>
 {% endblock authenticated %}
+{% block scripts %}
+  {{ block.super }}
+  <!-- scripts - organizacja_detail.html -->
+  <script src='{% static "js/organizacja_detail.js" %}' type="text/javascript"></script>
+{% endblock scripts %}
