@@ -1,8 +1,8 @@
 <!-- templates/front/leftPanel.html -->
-{% extends 'front/base.html' %}
 {% load static %}
-
-{% block styles %}
+{% block extra_styles %}
+   {{ block.super }}
+   <!-- extra_styles - leftPanel.html -->
    <style>
        #leftPanel {
          /*padding-left: 10px;*/
@@ -12,8 +12,10 @@
          padding: 10px;
        }
    </style>
-{% endblock styles %}
+{% endblock extra_styles %}
 {% block content %}
+  {{ block.super }}
+  <!-- content - leftPanel.html -->
   <div class="ibox-content" style>
     <div id="button-3-kreski"  data-animation="fadeInDownBig">
       <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
@@ -42,5 +44,9 @@
       </div>
     </div>
   </div>
-  <script src='{% static "js/leftPanel.js" %}' type="text/javascript"></script>
 {% endblock content %}
+{% block scripts %}
+  {{ block.super }}
+  <!-- scripts - leftPanel.html -->
+  <script src='{% static "js/leftPanel.js" %}' type="text/javascript"></script>
+{% endblock scripts %}

@@ -1,0 +1,27 @@
+<div class="ibox-content" style>
+  <div id="button-3-kreski"  data-animation="fadeInDownBig">
+    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+  </div>
+  <div id="leftPanel">
+    <div class="row">
+      <div class="inside-left-panel">
+        <div class="infont col-md-3 col-sm-4">
+          <a href="/" class="btn btn-primary btn-sm"><i class="fa fa-quora" aria-hidden="true"></i>Panel Główny</a>
+        </div>
+      </div>
+      <div class="inside-left-panel">
+        <div class="infont col-md-3 col-sm-4">
+          <a href="{% url 'logout' %}" class="btn btn-primary btn-sm"><i class="fa fa-quora" aria-hidden="true"></i>Wyloguj</a>
+        </div>
+      </div>
+      <div class="inside-left-panel">
+        <div class="infont col-md-3 col-sm-4">
+         <a href="#" class="btn btn-primary btn-sm" onclick="window.location.reload();"><i class="fa fa-quora" aria-hidden="true"></i>Refresh Page</a>
+        </div>
+      </div>
+      <div class="inside-left-panel">
+          <p>Jesteś zalogowany jako {{ user.username }}</p>
+      </div>
+    </div>
+  </div>
+</div>

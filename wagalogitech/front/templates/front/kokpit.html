@@ -1,7 +1,13 @@
 <!-- templates/front/kokpit.html -->
 {% extends 'front/raw.html' %}
 {% block title%}Kokpit{% endblock %}
+{% block extra_styles %}
+  <!-- extra_styles - kokpit.html -->
+  {{ block.super }}
+{% endblock extra_styles %}
 {% block authenticated %}
+   {{ block.super }}
+   <!-- authenticated - kokpit.html -->
    <div class="ibox-content" style>
       <div class="col-sm-4 col-sm-offset-2">
              <label class="col-sm-2 col-form-label">DostępnePanele</label>
@@ -10,5 +16,4 @@
              <a href="/front/pomiary/" class="btn btn-w-m btn-success">Twoje pomiary</a>
       </div>
    </div>
-
 {% endblock authenticated %}

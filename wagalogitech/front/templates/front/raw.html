@@ -1,19 +1,36 @@
 <!-- templates/front/raw.html -->
 {% extends 'front/base.html' %}
+{% load static %}
+{% if user.is_authenticated %}
+  {% block extra_style %}
+    <!-- extra_styles - raw.html -->
+    {{ block.super }}
+    {% include 'front/leftPanel-style.html' %}
+  {% endblock extra_style %}
+{% endif %}
 
 {% block content %}
-
+  <!-- content - raw.html -->
   {% if user.is_authenticated %}
-      {% include 'front/leftPanel.html' %}
       {% block authenticated %}
+        <!-- authenticated - raw.html -->
+        {{ block.super }}
+        <!-- include 'front/leftPanel.html' -->
+        {% include 'front/leftPanel-body.html' %}
       {% endblock authenticated %}
   {% else %}
       {% block unauthenticated %}
-    <div class="ibox-content" style>
-           <p>Nie jesteś zalogowany!</p>
-           <a href="{% url 'logout' %}" class="btn btn-w-m btn-success">Zaloguj się !</a>
-    </div>
+      <!-- unauthenticated - raw.html -->
+      <div class="ibox-content" style>
+             <p>Nie jesteś zalogowany!</p>
+             <a href="{% url 'logout' %}" class="btn btn-w-m btn-success">Zaloguj się !</a>
+      </div>
       {% endblock unauthenticated %}
   {% endif %}
-
 {% endblock content %}
+{% block scripts %}
+    {{ block.super }}
+    {% include 'front/leftPanel-script.html' %}
+    <!-- scripts - raw.html -->
+{% endblock scripts %}
+
