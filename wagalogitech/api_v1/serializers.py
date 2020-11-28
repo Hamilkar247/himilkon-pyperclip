@@ -29,7 +29,6 @@ class OrganizacjaSerializer(serializers.ModelSerializer):
         # fields = ['id', 'nazwa', 'opis']
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     pomiary = serializers.PrimaryKeyRelatedField(many=True, queryset=Pomiar.objects.all())
 

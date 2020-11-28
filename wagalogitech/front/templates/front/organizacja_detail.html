@@ -4,6 +4,7 @@
 {% block title %} Organizacja szczegóły {% endblock %}
 {% block authenticated %}
   {{ block.super }}
+  <!-- authenticated - organizacja_detail.html -->
   <div class="ibox">
     <div class="ibox-title">
       <h5>
@@ -12,7 +13,8 @@
       </h5>
     </div>
     <div class="ibox-content" style>
-      <form method="get">
+      <form id="form_edycjaorg" method="put">
+        {% csrf_token %}
         <div class="form-group  row">
           <label class="col-sm-2 col-form-label">Nazwa</label>
           <div class="col-sm-10">
@@ -38,7 +40,9 @@
   </div>
 {% endblock authenticated %}
 {% block scripts %}
-  {{ block.super }}
-  <!-- scripts - organizacja_detail.html -->
-  <script src='{% static "js/organizacja_detail.js" %}' type="text/javascript"></script>
+  {% if user.is_authenticated %}
+    {{ block.super }}
+    <!-- scripts - organizacja_detail.html -->
+    <script src='{% static "js/organizacja_detail.js" %}' type="text/javascript"></script>
+  {% endif %}
 {% endblock scripts %}

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import PomiarViewSet, UserViewSet, OrganizacjaViewSet, api_root
+from .views import  PomiarViewSet, UserViewSet, OrganizacjaViewSet, api_root
 from django.shortcuts import redirect
 from django.views.generic import RedirectView
 from rest_framework.routers import DefaultRouter
@@ -17,7 +17,9 @@ router.register(r'logipomiarowe', views.LogPomiarowyViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('organizacje/dodaj', views.dodajOrganizacje, name="dodajOrganizacje"),
+    #path('organizacje/', views.OrganizacjeList.as_view()),
+    #path('organizacje/<int:pk>/', views.OrganizacjeDetail.as_view()),
+    #path('organizacje/dodaj', views.dodajOrganizacje, name="dodajOrganizacje"),
 ]
 
 #urlpatterns = [
