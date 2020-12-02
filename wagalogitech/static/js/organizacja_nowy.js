@@ -24,7 +24,7 @@ $("#form_zapisorg").on("submit", function(e) {
    //data.opis = $("#opis_organizacji").val()
 
    $.ajax({
-      url      : "http://127.0.0.1:8000/api/organizacje/dodaj",
+      url      : "http://127.0.0.1:8000/api_v1/organizacje/dodaj",
       type     : "POST",
       data     : {
           nazwa: nazwa_org,
