@@ -6,7 +6,7 @@ let start_opis_org=''
 $(document).ready(function() {
    console.log("jestesmy w szczegolach organizacji")
    let searchParams = $(location).attr('href')//w vanilii JS to jestwindow.location.href
-   let destinationURL = searchParams.replace("front", "api")
+   let destinationURL = searchParams.replace("front", "api/v1")
    console.log("current url:" + destinationURL)
    $.ajax({
       url: destinationURL, //do poprawienia !!!
