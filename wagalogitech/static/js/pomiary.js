@@ -10,10 +10,10 @@ $(document).ready(function(){
            $('#mytable').append(
            '<tr>' +
               '<td>' + response[i].id + '</td>' +
-              '<td>' + response[i].owner + '</td>' +
               '<td>' + response[i].czyWazny + '</td>' +
               '<td>' + response[i].wartosc + '</td>' +
               '<td>' + response[i].data_pomiaru + '</td>' +
+              '<td>' + response[i].owner + '</td>' +
               '<td>' +
                  '  <a href="/front/pomiary/' + response[i].id + '" class="btn btn-primary btn-sm">' + response[i].id + '</a>' +
               '</td>' +
