@@ -18,7 +18,8 @@ from django.urls import include, path
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    path('api_v1/', include('api_v1.urls')),
+    path('api/v1/', include('api_v1.urls')),
+    path('api/v1.2/', include('api_v1_2.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('front/', include('front.urls')),

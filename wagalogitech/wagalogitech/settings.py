@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework',
     'api_v1',
+    'api_v1_2',
     'front',
     'core',
 ]
