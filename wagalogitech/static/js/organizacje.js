@@ -36,7 +36,7 @@ $( document ).ready(function() {
 
    console.log("Window on load end")
    $.ajax({
-       url: "http://127.0.0.1:8000/api_v1/organizacje/",
+       url: "http://127.0.0.1:8000/api/v1/organizacje/",
        type: "GET",
    }).done(function (response) {
        for(i=0; i<response.length; i++){
