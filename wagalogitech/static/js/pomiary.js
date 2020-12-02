@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   console.log("pomiary ajax function")
   $.ajax({
-     url: "http://127.0.0.1:8000/api_v1/pomiary/",
+     url: "http://127.0.0.1:8000/api/v1/pomiary/",
      type: "GET",
   }).done(function (response) {
       for(i=0; i<response.length; i++){
