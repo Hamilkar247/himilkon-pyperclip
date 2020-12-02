@@ -31,6 +31,7 @@ class OrganizacjaSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     pomiary = serializers.PrimaryKeyRelatedField(many=True, queryset=Pomiar.objects.all())
+    organizacje = serializers.PrimaryKeyRelatedField(many=True, queryset=Organizacja.objects.all())
 
     class Meta:
         model = User

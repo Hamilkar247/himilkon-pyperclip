@@ -96,9 +96,11 @@ class PomiarViewSet(viewsets.ModelViewSet):
 class OrganizacjaViewSet(viewsets.ModelViewSet):
     queryset = Organizacja.objects.all()  # filter(id=1)
     serializer_class = OrganizacjaSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
 
-    def post(self, request):
-        print("cokolwiek")
+    # def post(self, request):
+    #     print("cokolwiek")
 
 
 #class Get_organization_List(APIView):
@@ -114,13 +116,14 @@ class OrganizacjaViewSet(viewsets.ModelViewSet):
 #    return redirect('/')
 
 
-
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This viewsets automatically provides 'list' and 'detail' actions
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
 
 
 class SesjaUzytkownikaViewSet(viewsets.ModelViewSet):
