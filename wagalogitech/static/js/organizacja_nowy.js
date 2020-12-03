@@ -1,5 +1,20 @@
 console.log("organizacja_nowy.js")
-
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
 
 //wysywaleni danych na serwer
 $("#form_zapisorg").on("submit", function(e) {
@@ -24,12 +39,12 @@ $("#form_zapisorg").on("submit", function(e) {
    //data.opis = $("#opis_organizacji").val()
 
    $.ajax({
-      url      : "http://127.0.0.1:8000/api_v1/organizacje/dodaj",
+      url      : "http://127.0.0.1:8000/api/v1/organizacje/",
       type     : "POST",
       data     : {
           nazwa: nazwa_org,
           opis : opis_org,
-          csrfmiddlewaretoken: '{{ csrf_token }}',
+          csrfmiddlewaretoken: csrftoken,
       },
       success: function(){
          console.log("nazwa org:"+ nazwa_org)
