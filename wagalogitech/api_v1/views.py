@@ -47,73 +47,11 @@ class PomiarViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
 
-#class OrganizacjeList(APIView):
-#    """
-#    List all snippets, or create a new snippet.
-#    """
-#    def get(self, request, format=None):
-#        organizacja = Organizacja.objects.all()
-#        serializer = OrganizacjaSerializer(organizacja, many=True)
-#        return Response(serializer.data)
-#
-#    def post(self, request, format=None):
-#        serializer = OrganizacjaSerializer(data=request.data)
-#        if serializer.is_valid():
-#            serializer.save()
-#            return Response(serializer.data, status=status.HTTP_201_CREATED)
-#        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#
-#class OrganizacjeDetail(APIView):
-#    """
-#    Retrieve, update or delete a snippet instance.
-#    """
-#    def get_object(self, pk):
-#        try:
-#            return Organizacja.objects.get(pk=pk)
-#        except Organizacja.DoesNotExist:
-#            raise Http404
-#
-#    def get(self, request, pk, format=None):
-#        organizacja = self.get_object(pk)
-#        serializer = OrganizacjaSerializer(organizacja)
-#        return Response(serializer.data)
-#
-#    def put(self, request, pk, format=None):
-#        organizacja = self.get_object(pk)
-#        serializer = OrganizacjaSerializer(organizacja, data=request.data)
-#        if serializer.is_valid():
-#            serializer.save()
-#            return Response(serializer.data)
-#        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#    def delete(self, request, pk, format=None):
-#        organizacja = self.get_object(pk)
-#        organizacja.delete()
-#        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
 class OrganizacjaViewSet(viewsets.ModelViewSet):
     queryset = Organizacja.objects.all()  # filter(id=1)
     serializer_class = OrganizacjaSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
-
-    # def post(self, request):
-    #     print("cokolwiek")
-
-
-#class Get_organization_List(APIView):
-#    def get(self, request):
-#        organizacje = Organizacja.objects.all()
-#        serializer_class = OrganizacjaSerializer
-#
-#
-#@csrf_exempt # w przyszlosci trzeba znalezc inny sposób - to nie jest zbyt zalecane
-#def dodajOrganizacje(request):
-#    organizacje = Organizacja(nazwa=request.POST['nazwa'], opis=request.POST['opis'])
-#    organizacje.save()
-#    return redirect('/')
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
