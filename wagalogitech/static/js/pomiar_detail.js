@@ -14,7 +14,7 @@ $(document).ready(function() {
       url: destinationURL,
       type: "GET",
    }).done(function(response) {
-      console.log("udalo sie pobrac z aaksa dane !")
+      console.log("udalo sie pobrac z ajaksa dane !")
       $('#owner').attr('value', response.owner)
       $('#czyWazny').attr('value', response.czyWazny)
       $('#wartosc').attr('value', response.wartosc)
