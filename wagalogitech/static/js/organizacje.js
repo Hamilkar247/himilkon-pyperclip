@@ -15,16 +15,12 @@ $(document).ready(function(){
   })
  console.log("zaladowano funkcje paragrafu hideclick");
 })
-//testowa funkcja ajaxa - jak wstawić ?
-//$(document).ready(function(){
-//  $("#przycisk").click(function(){
-//    $.ajax({url: "static/js/demo_test.txt", success:
-//      function(result){
-//        $("#div1").html(result)}
-//    });
-//  })
-//})
 
+$(document).ready(function() {
+    $('#dataTable').dataTable( {
+      //  "order": [[ 3, "desc" ]]
+    });
+});
 
 //uzupelnianie liste organizacji
 $( document ).ready(function() {
@@ -57,27 +53,30 @@ $( document ).ready(function() {
        }
    }).fail(function() {
      alert("Wystapil blad w polaczeniu z djangorestapi!");
-   })
+   }).then(
+     $('#mytable').dataTable( {
+        //"order": [[ 3, "desc" ]]
+     })
+   )
 })
+
+$(document).ready(function() {
+    $('#example').DataTable( {
+        ajax: {
+         url:  "http://127.0.0.1:8000/api/v1/organizacje/",
+         type: "GET",
+         dataSrc: "",
+        },
+        columns: [
+            { data: 'id' },
+            { data: 'nazwa' },
+            { data: 'opis' }
+        ]
+    } );
+} );
 
 //wartosci z bazy danych pewnej organizacji
 $(document).ready(function(){
    console.log("")
 })
 
-//to nie wiem co u tomka za bardzo za co odpowiada
-//function buttonFunction(obj){
-//    zlecone_badanie_id = obj.getAttribute('data-id')
-//    console.log()
-//    location.href=='/admin/Procedura/etap_probka/add/?zlecone_badanie='+zlecone_badanie_id
-//}
-
-
-//$(document).ready(function()){
-//  $("#butt").click(function(){
-//    //$("#leftPanel").hide();
-//    $("#hideclick").hide();
-//    $(this).hide();
-//  })
-//  console.log("schowano left panel")
-//}

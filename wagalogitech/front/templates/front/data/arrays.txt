@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+        "id": 1,
+        "nazwa": "Fabryka Złych uczynków",
+        "opis": "ahjo"
+    },
+    {
+        "id": 2,
+        "nazwa": "Fundacja złamanego grosza",
+        "opis": "otázka"
+    },
+    {
+        "id": 3,
+        "nazwa": "Fabryka szalonego chomika",
+        "opis": "chomik ma atest unijny i przeszedł wszystkie badania bhp"
+    },
+    {
+        "id": 4,
+        "nazwa": "Fabryka szalonego chomika",
+        "opis": "chomik ma atest unijny i przeszedł wszystkie badania bhp"
+    },
+    {
+        "id": 5,
+        "nazwa": "Fabryka szalonego chomika",
+        "opis": "chomik ma atest unijny i przeszedł wszystkie badania bhp"
+    },
+    {
+        "id": 6,
+        "nazwa": "eqw",
+        "opis": "ewq"
+    },
+    {
+        "id": 7,
+        "nazwa": "eqw",
+        "opis": "rew"
+    },
+    {
+        "id": 8,
+        "nazwa": "rewq",
+        "opis": "rq"
+    },
+    {
+        "id": 9,
+        "nazwa": "rew",
+        "opis": "ter"
+    },
+    {
+        "id": 10,
+        "nazwa": "rewq",
+        "opis": "etwrt"
+    },
+    {
+        "id": 11,
+        "nazwa": "rwer",
+        "opis": "132"
+    },
+    {
+        "id": 13,
+        "nazwa": "bozi",
+        "opis": "vojovníci"
+    },
+    {
+        "id": 14,
+        "nazwa": "grupa filmowa darwin",
+        "opis": "rafal i slavek"
+    },
+    {
+        "id": 15,
+        "nazwa": "cherbata dla chelmian",
+        "opis": "by zylo sie lepiej"
+    }
+  ]
+}

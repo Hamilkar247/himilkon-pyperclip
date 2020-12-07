@@ -10,6 +10,7 @@ urlpatterns = [
     path('organizacje/', views.organizacje, name="organizacje"),
     path('organizacje/<int:organizacja_id>', views.organizacja_detail, name="organizacja_detail"),
     path('organizacje/nowy', views.organizacje_nowy, name="organizacje_nowy"),
+    path('organizacje/data/arrays.txt', views.data_arrays, name="data_arrays.txt"),
     path('pomiary/', views.pomiary, name="pomiary"),
     path('pomiary/<int:pomiar_id>', views.pomiary_detail, name="pomiary"),
     path('pomiary/nowy', views.pomiary_nowy, name="pomiary_nowy"),

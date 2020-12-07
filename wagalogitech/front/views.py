@@ -37,6 +37,9 @@ def organizacje_nowy(request):
     return render(request, "front/organizacje_nowy.html")
 
 
+def data_arrays(request):
+    return render(request, "front/data/arrays.txt")
+
 def pomiary(request):
     pomiary_list = Pomiar.objects.all()
     template = loader.get_template('front/pomiary.html')

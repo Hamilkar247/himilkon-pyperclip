@@ -21,6 +21,10 @@ $(document).ready(function(){
       }
   }).fail(function() {
      alert("Wystapil blad w polaczeniu z djangorestapi!")
+  }).then(function() {
+    $('#mytable').dataTable( {
+      "order": [[ 3, "desc" ]]
+    });
   })
 
 })

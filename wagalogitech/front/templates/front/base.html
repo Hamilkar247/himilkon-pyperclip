@@ -14,6 +14,8 @@
         <link href="{% static 'inspinia/font-awesome/css/font-awesome.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'inspinia/css/style.css' %} " rel="stylesheet">
         <link href="{% static 'inspinia/css/animate.css' %}" rel="stylesheet">
+        <link href="{% static 'inspinia/css/plugins/dataTables/datatables.min.css' %}" rel="stylesheet">
+        <link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
         <!--
           <style>
               body {
@@ -39,10 +41,17 @@
    {% block content %}
       <!-- content - baseee html -->
    {% endblock content %}
-
    {% block scripts %}
-      <script src='{% static "inspinia/js/jquery-3.1.1.min.js" %}' type="text/javascript"></script>
-      <!-- scripts - base.html -->
+     <!-- scripts - base.html -->
+     <script src='{% static "inspinia/js/jquery-3.1.1.min.js" %}' type="text/javascript"></script>
+     <script src='{% static "inspinia/js/popper.min.js" %}' type="text/javascript"></script>
+     <script src='{% static "inspinia/js/bootstrap.js" %}' type="text/javascript"></script>
+     <script src='{% static "inspinia/js/plugins/metisMenu/jquery.metisMenu.js" %}' type="text/javascript"></script>
+     <script src='{% static "inspinia/js/plugins/slimscroll/jquery.slimscroll.min.js" %}' type="text/javascript"></script>
+     <script src='{% static "inspinia/js/plugins/dataTables/datatables.min.js" %}' type="text/javascript"></script>
+     <script src='{% static "inspinia/js/plugins/dataTables/dataTables.bootstrap4.min.js" %}' type="text/javascript"></script>
+     <script src='{% static "inspinia/js/inspinia.js" %}' type="text/javascript"></script>
+     <script src='{% static "inspinia/js/plugins/pace/pace.min.js" %}' type="text/javascript"></script>
    {% endblock scripts %}
    </main>
 </body>

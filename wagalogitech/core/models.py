@@ -58,7 +58,7 @@ class Organizacja(models.Model):
     class Meta:
         verbose_name = "Organizacja"
         verbose_name_plural = "Organizacje"
-        ordering = ['nazwa']
+        ordering = ['id']
 
 
 class SesjaUzytkownika(models.Model):
