@@ -16,67 +16,52 @@ $(document).ready(function(){
  console.log("zaladowano funkcje paragrafu hideclick");
 })
 
-$(document).ready(function() {
-    $('#dataTable').dataTable( {
-      //  "order": [[ 3, "desc" ]]
-    });
-});
-
 //uzupelnianie liste organizacji
 $( document ).ready(function() {
 
-    //console.log(window.location.href)
-    //var url = new URL(window.location.href);
-    //var organizacja = url.searchParams.get("organizacja");
-    //console.log("organizacja: "+ organizacja);
-
-   console.log("Window on load end")
-   $.ajax({
-       url: "http://127.0.0.1:8000/api/v1/organizacje/",
-       type: "GET",
-   }).done(function (response) {
-       for(i=0; i<response.length; i++){
-           console.log(response[i].id)
-            console.log('<a href="/front/organizacje/' + response[i].id + '" class="btn btn-w-m btn-success"  >' + response[i].nazwa + '</a>');
-           $('#organization_table').append(
-           '<tr>' +
-               '<td>' + response[i].id + '</td>' +
-               '<td>' + response[i].nazwa + '</td>' +
-               '<td>' + response[i].opis + '</td>' +
-               '<td>' +
-                 '  <a href="/front/organizacje/' + response[i].id + '" class="btn btn-w-m btn-success">' + response[i].nazwa + '</a>' +
-               '</td>' +
-               //'<td><button id="btn_organizacja_'+response[i].id+'" class="btn btn-w-m btn-success"
-               //onclick="buttonFunction(this)" data-id="'+response[i].id+'">Utwórz organizacje</button>'+
-               //'</td>' +
-           '</tr>');
-       }
-   }).fail(function() {
-     alert("Wystapil blad w polaczeniu z djangorestapi!");
-   }).then(
-     $('#mytable').dataTable( {
-        //"order": [[ 3, "desc" ]]
-     })
-   )
-})
-
-$(document).ready(function() {
-    $('#example').DataTable( {
+   console.log("funkcja uzupelnianie organization_table")
+   $('#organization_table').DataTable( {
         ajax: {
          url:  "http://127.0.0.1:8000/api/v1/organizacje/",
          type: "GET",
          dataSrc: "",
         },
+
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2 ]
+                }
+            },
+            {
+                extend: 'colvis',
+                columns: ':not(.noVis)'
+            }
+        ],
         columns: [
             { data: 'id' },
             { data: 'nazwa' },
-            { data: 'opis' }
+            { data: 'opis' },
+            { data: 'id',
+              render: function (data, type, full, meta) {
+                numer = data
+                return '<a href="/front/organizacje/' + numer + '" class="btn btn-w-m btn-success"> Edytuj </a>';
+              }
+            },
         ]
-    } );
-} );
-
-//wartosci z bazy danych pewnej organizacji
-$(document).ready(function(){
-   console.log("")
+    })
 })
-
