@@ -38,7 +38,7 @@ $( document ).ready(function() {
        for(i=0; i<response.length; i++){
            console.log(response[i].id)
             console.log('<a href="/front/organizacje/' + response[i].id + '" class="btn btn-w-m btn-success"  >' + response[i].nazwa + '</a>');
-           $('#mytable').append(
+           $('#organization_table').append(
            '<tr>' +
                '<td>' + response[i].id + '</td>' +
                '<td>' + response[i].nazwa + '</td>' +
