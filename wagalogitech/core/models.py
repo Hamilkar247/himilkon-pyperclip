@@ -3,7 +3,8 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    pass
+    #isSuperUser - nie wiem czy tego domyślnie nei ma - do sprawdzenia
+    organizacja = models.ForeignKey('Organizacja', on_delete=models.SET_NULL, null=True)
 
 
 class Pomiar(models.Model):
@@ -70,7 +71,7 @@ class Organizacja(models.Model):
 class SesjaUzytkownika(models.Model):
     start_sesji = models.DateTimeField(blank=False, verbose_name="start sesji")
     koniec_sesji = models.DateTimeField(blank=True, verbose_name="koniec sesji")
-    owner = models.ForeignKey("User", related_name='sesjeuzytkownika', on_delete=models.CASCADE)
+    owner = models.ForeignKey("User", related_name='sesjeuzytkownika_list', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.owner) + " " + str(self.start_sesji)
@@ -88,7 +89,7 @@ class LogAdministracyjny(models.Model):
     opis = models.CharField(max_length=500, verbose_name="Opis")
     data = models.DateField(blank=False, verbose_name="Data")
     czynnosc = models.CharField(max_length=200, verbose_name="Czynność")
-    owner = models.ForeignKey("User", related_name="logiadministracyjne", on_delete=models.CASCADE)
+    owner = models.ForeignKey("User", related_name="logadministracyjny_list", on_delete=models.CASCADE)
     organizacja = models.ForeignKey(Organizacja, on_delete=models.CASCADE)
 
     class Meta:
