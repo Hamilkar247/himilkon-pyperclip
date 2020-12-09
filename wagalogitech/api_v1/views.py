@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from rest_framework import permissions, viewsets, generics, status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
@@ -89,6 +89,14 @@ class SeriaPomiarowaViewSet(viewsets.ModelViewSet):
     serializer_class = SeriaPomiarowaSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
+
+    # example URL http://127.0.0.1:8000/api/v1/seriaPomiarowa/1/pomiary
+    @action(methods=['get'], detail=True, permission_classes=[IsOwnerOrReadOnly])
+    def pomiary(self, request, pk):
+        seria_pomiarowa = SeriaPomiarowa.objects.get(id=pk)
+        pomiary = seria_pomiarowa.objects.get(id=seria_pomiarowa.id)
+        serializer = PomiarSerializer(pomiary, many=True)
+        return Response(serializer.data)
 
 
 class LogPomiarowyViewSet(viewsets.ModelViewSet):
