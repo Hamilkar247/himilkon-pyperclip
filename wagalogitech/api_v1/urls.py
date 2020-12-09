@@ -8,13 +8,13 @@ from . import views
 from .apps import ApiV1Config
 
 router = DefaultRouter()
-router.register(r'pomiary', views.PomiarViewSet)
-router.register(r'users', views.UserViewSet)
-router.register(r'organizacje', views.OrganizacjaViewSet)
-router.register(r'sesjeuzytkownika', views.SesjaUzytkownikaViewSet)
-router.register(r'logiadministracyjny', views.LogAdministracyjnyViewSet)
-router.register(r'seriepomiarowe', views.SeriaPomiarowaViewSet)
-router.register(r'logipomiarowe', views.LogPomiarowyViewSet)
+router.register(r'pomiar', views.PomiarViewSet)
+router.register(r'user', views.UserViewSet)
+router.register(r'organizacja', views.OrganizacjaViewSet)
+router.register(r'sesjaUzytkownika', views.SesjaUzytkownikaViewSet)
+router.register(r'logAdministracyjny', views.LogAdministracyjnyViewSet)
+router.register(r'seriaPomiarowa', views.SeriaPomiarowaViewSet)
+router.register(r'logPomiarowy', views.LogPomiarowyViewSet)
 
 app_name = ApiV1Config.name
 urlpatterns = [
