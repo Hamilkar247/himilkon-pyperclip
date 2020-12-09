@@ -16,7 +16,7 @@ from .permissions import IsOwnerOrReadOnly
 from .serializers import (
 
     PomiarSerializer, LogPomiarowySerializer, LogAdministracyjnySerializer,
-    UserSerializer, OrganizacjaSerializer, SesjaUzytkownikaSerializer
+    UserSerializer, OrganizacjaSerializer, SesjaUzytkownikaSerializer, SeriaPomiarowaSerializer
 
 )
 
@@ -83,7 +83,7 @@ class LogAdministracyjnyViewSet(viewsets.ModelViewSet):
 
 class SeriaPomiarowaViewSet(viewsets.ModelViewSet):
     queryset = SeriaPomiarowa.objects.all()
-    serializer_class = SeriaPomiarowa
+    serializer_class = SeriaPomiarowaSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
 
