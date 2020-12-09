@@ -8,14 +8,8 @@ from core.models import (
     User,
 )
 
-# ================ https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers
-class PomiarSerializer(serializers.ModelSerializer):
-    """
-    An automatically determined set of fields.
-    Simple default implementations for the create() and update() methods.
-    """
-    owner = serializers.ReadOnlyField(source='owner.username')
 
+class PomiarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pomiar
         fields = "__all__"
@@ -31,9 +25,6 @@ class OrganizacjaSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    pomiary = serializers.PrimaryKeyRelatedField(many=True, queryset=Pomiar.objects.all())
-    organizacje = serializers.PrimaryKeyRelatedField(many=True, queryset=Organizacja.objects.all())
-
     class Meta:
         model = User
         fields = "__all__"  # ['id', 'username', 'pomiary']
@@ -47,8 +38,6 @@ class SesjaUzytkownikaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# =========== https://www.django-rest-framework.org/tutorial/3-class-based-views/
-
 class LogAdministracyjnySerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
@@ -57,19 +46,13 @@ class LogAdministracyjnySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# =========== https://www.django-rest-framework.org/tutorial/3-class-based-views/
-
 class SeriaPomiarowaSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-
     class Meta:
         model = SeriaPomiarowa
         fields = "__all__"
 
 
 class LogPomiarowySerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-
     class Meta:
         model = LogPomiarowy
         fields = "__all__"
