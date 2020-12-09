@@ -1,9 +1,7 @@
 from django.db import models
 
-# ======= https://www.django-rest-framework.org/tutorial/1-serialization/#writing-regular-django-views-using-our-serializer
+
 class Pomiar(models.Model):
-    # stworzona = models.DateTimeField(auto_now_add=True)
-    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     czyWazny = models.BooleanField(verbose_name="Czy ważny?")
     wartosc = models.CharField(max_length=300, verbose_name="wartość")
     data_pomiaru = models.DateTimeField(blank=False, verbose_name="data pomiaru", auto_now_add=True)
@@ -13,7 +11,7 @@ class Pomiar(models.Model):
     # highlighted = models.TextField()
 
     def __str__(self):
-        return str(self.data_pomiaru)
+        return str(self.owner.verbose_name) + ' ' + str(self.data_pomiaru) + ' wart: ' + str(self.wartosc)
 
     def save(self, *args, **kwargs):
         czyWazny = 'table' if self.czyWazny else False
@@ -41,7 +39,6 @@ class Pomiar(models.Model):
 #    class Meta:
 #        verbose_name = "Użytkownik"
 #        verbose_name_plural = "Użytkownicy"
-
 
 
 class Organizacja(models.Model):
@@ -141,4 +138,3 @@ class LogPomiarowy(models.Model):
     class Meta:
         verbose_name = "Log Pomiarowy"
         verbose_name_plural = "Logi Pomiarowe"
-
