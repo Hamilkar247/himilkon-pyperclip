@@ -19,10 +19,6 @@ class Pomiar(models.Model):
         return str(self.sesja_uzytkownika) + ' ' + str(self.seria_pomiarowa) + ' ' + str(
             self.data_pomiaru) + ' wart: ' + str(self.wartosc)
 
-    def save(self, *args, **kwargs):
-        czyWazny = 'table' if self.czyWazny else False
-        super(Pomiar, self).save(*args, **kwargs)
-
     class Meta:
         verbose_name = "Pomiar"
         verbose_name_plural = "Pomiary"
@@ -59,9 +55,6 @@ class Organizacja(models.Model):
     def __str__(self):
         return self.nazwa
 
-    def save(self, *args, **kwargs):
-        super(Organizacja, self).save(*args, **kwargs)
-
     class Meta:
         verbose_name = "Organizacja"
         verbose_name_plural = "Organizacje"
@@ -75,9 +68,6 @@ class SesjaUzytkownika(models.Model):
 
     def __str__(self):
         return str(self.owner) + " " + str(self.start_sesji)
-
-    def save(self, *args, **kwargs):
-        super(SesjaUzytkownika, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Sesja Użytkownika"
@@ -100,9 +90,6 @@ class LogAdministracyjny(models.Model):
     def __str__(self):
         return str(self.opis)
 
-    def save(self, *args, **kwargs):
-        super(LogAdministracyjny, self).save(*args, **kwargs)
-
 
 class SeriaPomiarowa(models.Model):
     nazwa_serii = models.CharField(max_length=100, verbose_name="nazwa serii")
@@ -114,9 +101,6 @@ class SeriaPomiarowa(models.Model):
 
     def __str__(self):
         return str(self.nazwa_serii)
-
-    def save(self, *args, **kwargs):
-        super(SeriaPomiarowa, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Seria Pomiarowa"
@@ -131,9 +115,6 @@ class LogPomiarowy(models.Model):
 
     def __str__(self):
         return str(self.opis)
-
-    def save(self, *args, **kwargs):
-        super(LogPomiarowy, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Log Pomiarowy"
