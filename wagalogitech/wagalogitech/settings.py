@@ -118,6 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+AUTH_USER_MODEL = "core.User"
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 

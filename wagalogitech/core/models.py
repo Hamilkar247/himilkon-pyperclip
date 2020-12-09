@@ -1,4 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    pass
 
 
 class Pomiar(models.Model):
@@ -10,7 +15,8 @@ class Pomiar(models.Model):
     seria_pomiarowa = models.ForeignKey('SeriaPomiarowa', on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.sesja_uzytkownika) + ' ' + str(self.seria_pomiarowa) + ' ' + str(self.data_pomiaru) + ' wart: ' + str(self.wartosc)
+        return str(self.sesja_uzytkownika) + ' ' + str(self.seria_pomiarowa) + ' ' + str(
+            self.data_pomiaru) + ' wart: ' + str(self.wartosc)
 
     def save(self, *args, **kwargs):
         czyWazny = 'table' if self.czyWazny else False
@@ -45,8 +51,9 @@ class Organizacja(models.Model):
     nazwa = models.CharField(max_length=200, verbose_name="Nazwa")
     opis = models.CharField(max_length=500, verbose_name="Opis")
     adres = models.CharField(max_length=200, verbose_name="Adres")
-    #to bardziej szef szefow niz uzytkownik - potem trzeba pomyśleć czy nei trzeba by zrobić organizacja uzytkownik many to many
-    #owner = models.ForeignKey('auth.User', related_name='pomiary', on_delete=models.CASCADE)
+
+    # to bardziej szef szefow niz uzytkownik - potem trzeba pomyśleć czy nei trzeba by zrobić organizacja uzytkownik many to many
+    # owner = models.ForeignKey('auth.User', related_name='pomiary', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nazwa
@@ -63,7 +70,7 @@ class Organizacja(models.Model):
 class SesjaUzytkownika(models.Model):
     start_sesji = models.DateTimeField(blank=False, verbose_name="start sesji")
     koniec_sesji = models.DateTimeField(blank=True, verbose_name="koniec sesji")
-    owner = models.ForeignKey("auth.User", related_name='sesjeuzytkownika', on_delete=models.CASCADE)
+    owner = models.ForeignKey("User", related_name='sesjeuzytkownika', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.owner) + " " + str(self.start_sesji)
@@ -81,7 +88,7 @@ class LogAdministracyjny(models.Model):
     opis = models.CharField(max_length=500, verbose_name="Opis")
     data = models.DateField(blank=False, verbose_name="Data")
     czynnosc = models.CharField(max_length=200, verbose_name="Czynność")
-    owner = models.ForeignKey("auth.User", related_name="logiadministracyjne", on_delete=models.CASCADE)
+    owner = models.ForeignKey("User", related_name="logiadministracyjne", on_delete=models.CASCADE)
     organizacja = models.ForeignKey(Organizacja, on_delete=models.CASCADE)
 
     class Meta:

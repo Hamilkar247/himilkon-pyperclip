@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from core.models import (
     Organizacja,
     Pomiar, SesjaUzytkownika, LogPomiarowy, LogAdministracyjny, SeriaPomiarowa,
+    User,
 )
 
 # ================ https://www.django-rest-framework.org/tutorial/1-serialization/#using-modelserializers

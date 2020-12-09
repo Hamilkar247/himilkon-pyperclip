@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from django.shortcuts import redirect
 
 from core.models import Pomiar, LogPomiarowy, LogAdministracyjny \
-    , SeriaPomiarowa, Organizacja, SesjaUzytkownika
+    , SeriaPomiarowa, Organizacja, SesjaUzytkownika, User
 
 from .permissions import IsOwnerOrReadOnly
 from .serializers import (
