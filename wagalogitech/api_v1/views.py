@@ -20,8 +20,12 @@ from .serializers import (
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
-        'pomiary': reverse('pomiar-list', request=request, format=format),
-        'organizacja': reverse('organizacja-list', request=request, format=format)
+        'pomiar': reverse('pomiar-list', request=request, format=format),
+        'organizacja': reverse('organizacja-list', request=request, format=format),
+        'sesjaUzytkownika': reverse('sesjaUzytkownika-list', request=request, format=format),
+        'logAdministracyjny': reverse('logAdministracyjny-list', request=request, format=format),
+        'seriaPomiarowa': reverse('seriaPomiarowa-list', request=request, format=format),
+        'logPomiarowy': reverse('logPomiarowy-list', request=request, format=format),
     })
 
 
