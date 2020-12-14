@@ -100,7 +100,7 @@ class SeriaPomiarowa(models.Model):
     koniec_pomiaru = models.DateTimeField(blank=True, verbose_name="koniec pomiaru")
 
     def __str__(self):
-        return str(self.nazwa_serii)
+        return str(self.organizacja) + " " + str(self.nazwa_serii)
 
     class Meta:
         verbose_name = "Seria Pomiarowa"

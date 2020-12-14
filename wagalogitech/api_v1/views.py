@@ -77,15 +77,15 @@ class LogAdministracyjnyViewSet(viewsets.ModelViewSet):
 class SeriaPomiarowaViewSet(viewsets.ModelViewSet):
     queryset = SeriaPomiarowa.objects.all()
     serializer_class = SeriaPomiarowaSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     # example URL http://127.0.0.1:8000/api/v1/seriaPomiarowa/1/pomiary
-    @action(methods=['get'], detail=True, permission_classes=[IsOwnerOrReadOnly])
+    @action(methods=['get'], detail=True, permission_classes=[
+        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly])
     def pomiary(self, request, pk):
-        seria_pomiarowa = SeriaPomiarowa.objects.get(id=pk)
-        pomiary = seria_pomiarowa.objects.get(id=seria_pomiarowa.id)
-        serializer = PomiarSerializer(pomiary, many=True)
+        ser_pom = SeriaPomiarowa.objects.get(id=pk)
+        pomiary = Pomiar.objects.get(seria_pomiarowa=ser_pom)
+        serializer = PomiarSerializer(pomiary)#, many=True)
         return Response(serializer.data)
 
 
