@@ -1,8 +1,10 @@
 from django.urls import path, include
 from . import views
+from .apps import FrontConfig
 #router = DefaultRouter()
 #router.register(r'main', views.FrontViewSet)
 
+app_name = FrontConfig.name
 urlpatterns = [
     path('front_root', views.front_root, name='front_root'),
     path('kokpit', views.kokpit, name="kokpit"),
