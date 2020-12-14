@@ -1,4 +1,22 @@
 console.log("pomiar_nowy.js")
+let number_of_pomiar=null
+let destinationURL=null
+let regex = null
+
+function func_for_number_of_pomiar(){
+  let url = window.location.href
+  table_of_url = url.split('/')
+  console.log("table of url" + table_of_url)
+  if (table_of_url[table_of_url.length - 1] == '') {
+    number_of_pomiar = table_of_url[table_of_url.length - 2]
+  }
+  else {
+    number_of_pomiar = table_of_url[table_of_url - 1]
+  }
+  console.log("url:"+window.location.href)
+  console.log("number_of_pomiar:"+number_of_pomiar)
+}
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -14,6 +32,7 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
 const csrftoken = getCookie('csrftoken');
 let start_owner=''
 let start_czyWazny=''
@@ -35,13 +54,10 @@ $("#form_zapis_pomiar").on("submit", function(e) {
    console.log("czyWazny: " + start_czyWazny)
    console.log("wartosc: " + start_wartosc)
    console.log("data_pomiaru: " + start_data_pomiaru)
-   //jeszcze inny sposób tablicowy
-   //var data = {};
-   //data.nazwa = $("#nazwa_organizacji").val()
-   //data.opis = $("#opis_organizacji").val()
-
+   destinationURL = get_urls().url_home + get_urls().api_v1_pomiar
+   console.log("current url:" + destinationURL)
    $.ajax({
-      url      : "http://127.0.0.1:8000/api/v1/pomiary",
+      url      : destinationURL,
       type     : "POST",
       data     : {
         //  owner:        start_owner,
@@ -60,14 +76,4 @@ $("#form_zapis_pomiar").on("submit", function(e) {
          console.log("wartosc: " + start_wartosc);
          console.log("data_pomiaru: " + start_data_pomiaru);
    })
-  //alternatywna wersja wyswietlania danych w zapisie poza ajaxem
-  ///.done(function(response){
-  ///     console.log("nazwa org:"+ nazwa)
-  ///     console.log("opis org:" + opis)
-  ///}).fail(function() {
-  ///    console.log("nazwa org:"+ nazwa)
-  ///    console.log("opis org:" + opis)
-  ///    alert("Wystąpił błąd w połaczeniu z DjangoRestApi")
-  ///})
-
 })

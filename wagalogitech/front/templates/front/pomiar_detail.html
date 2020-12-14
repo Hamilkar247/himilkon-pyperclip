@@ -53,6 +53,18 @@
     </div>
   </div>
 {% endblock authenticated %}
+{% block generate_revers_url %}
+  {{ block.super }}
+  <!-- generate_revers_url - front/organizacja_detail.html-->
+  var revers_urls = {
+    url_home: "http://127.0.0.1:8000",
+    front_pomiar: "{% url 'front:pomiary' %}",
+    api_v1_pomiar: "{% url 'api_v1:pomiar-list' %}"
+  }
+  function get_urls(){
+    return revers_urls
+  }
+{% endblock generate_revers_url %}
 {% block scripts %}
   {{ block.super }}
   {% if user.is_authenticated %}

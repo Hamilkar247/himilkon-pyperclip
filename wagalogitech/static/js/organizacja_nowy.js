@@ -37,9 +37,11 @@ $("#form_zapisorg").on("submit", function(e) {
    //var data = {};
    //data.nazwa = $("#nazwa_organizacji").val()
    //data.opis = $("#opis_organizacji").val()
-
+   console.log("jestesmy w danych nowej organizacji")
+   destinationURL = get_urls().url_home + get_urls().api_v1_organizacje
+   console.log("current url:" + destinationURL)
    $.ajax({
-      url      : "http://127.0.0.1:8000/api/v1/organizacje/",
+      url      : destinationURL,
       type     : "POST",
       data     : {
           nazwa: nazwa_org,
@@ -50,7 +52,6 @@ $("#form_zapisorg").on("submit", function(e) {
          console.log("nazwa org:"+ nazwa_org)
          console.log("opis org:" + opis_org)
          alert ('Save data');
-         //window.location = "/";
       },
       failure: function(){
          alert ('Nie zostala dodana zmienna');
