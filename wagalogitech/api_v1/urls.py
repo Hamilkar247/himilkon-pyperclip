@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.views.generic import RedirectView
 from rest_framework.routers import DefaultRouter
 from . import views
-from . import ApiV1Config
+from .apps import ApiV1Config
 
 router = DefaultRouter()
 router.register(r'pomiary', views.PomiarViewSet)
@@ -16,7 +16,7 @@ router.register(r'logiadministracyjny', views.LogAdministracyjnyViewSet)
 router.register(r'seriepomiarowe', views.SeriaPomiarowaViewSet)
 router.register(r'logipomiarowe', views.LogPomiarowyViewSet)
 
-apps_name = ApiV1Config.name
+app_name = ApiV1Config.name
 urlpatterns = [
     path('', include(router.urls)),
 ]

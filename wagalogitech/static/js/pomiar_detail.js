@@ -1,4 +1,20 @@
-console.log("organizacja_detail.js")
+console.log("pomiar_detail.js")
+let number_of_pomiar=null
+let destinationURL=null
+let regex = null
+function func_for_number_of_pomiar(){
+  let url = window.location.href
+  table_of_url = url.split('/')
+  console.log("table of url" + table_of_url)
+  if (table_of_url[table_of_url.length - 1] == '') {
+    number_of_pomiar = table_of_url[table_of_url.length - 2]
+  }
+  else {
+    number_of_pomiar = table_of_url[table_of_url - 1]
+  }
+  console.log("url:"+window.location.href)
+  console.log("number_of_pomiar:"+number_of_pomiar)
+}
 
 let start_owner=''
 let start_czyWazny=''
@@ -6,10 +22,11 @@ let start_wartosc=''
 let start_data_pomiaru=''
 
 $(document).ready(function() {
-   console.log("pomiar szczegoly")
+   func_for_number_of_pomiar()
+   console.log("pomiar_szczegoly.js")
    let searchParams = $(location).attr('href')
-   let destinationURL = searchParams.replace("front", "api/v1")
-   console.log("current url: " +destinationURL)
+   destinationURL = get_urls().url_home + get_urls().api_v1_pomiar +number_of_pomiar
+   console.log("destination url: " +destinationURL)
    $.ajax({
       url: destinationURL,
       type: "GET",

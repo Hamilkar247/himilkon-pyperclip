@@ -1,4 +1,20 @@
 console.log("organizacja_detail.js")
+let number_of_organizacja=null
+let destinationURL=null
+let regex = null
+function func_for_number_of_organizacje(){
+  let url = window.location.href
+  table_of_url = url.split('/')
+  console.log("table of url" + table_of_url)
+  if (table_of_url[table_of_url.length - 1] == '') {
+    number_of_organizacja = table_of_url[table_of_url.length - 2]
+  }
+  else {
+    number_of_organizacja = table_of_url[table_of_url - 1]
+  }
+  console.log("url:"+window.location.href)
+  console.log("number_of_organizacja:"+number_of_organizacja)
+}
 
 function getCookie(name) {
     let cookieValue = null;
@@ -22,23 +38,18 @@ const csrftoken = getCookie('csrftoken');
 let start_nazwa_org=''
 let start_opis_org=''
 
-let currentUrl = $(location).attr('href')//w vanilii JS to jestwindow.location.href
-let urlsearchParams = currentUrl.split('/')
-console.log("tablica elementów: urlsearchParams")
-let numberOfOrganization = urlsearchParams[urlsearchParams.length-1]
-console.log("Numer elementu:"+ numberOfOrganization)
 
 //wartosci z bazy danych pewnej organizacji
 $(document).ready(function() {
-
+   func_for_number_of_organizacje()
    console.log("jestesmy w szczegolach organizacji")
-   let destinationURL = currentUrl.replace("front", "api/v1")
+   destinationURL = get_urls().url_home + get_urls().api_v1_organizacje +number_of_organizacja
    console.log("current url:" + destinationURL)
    $.ajax({
-      url: destinationURL, //do poprawienia !!!
+      url: destinationURL,
       type: "GET",
    }).done(function(response) {
-       console.log("udalo sie pobrac z ajaksa dane !")
+       console.log("udalo sie polaczyc przez ajaksa !")
        $('#nazwa_organizacji').attr('value', response.nazwa);
        $("#opis_organizacji").attr('value', response.opis);
    }).fail(function() {
@@ -54,10 +65,10 @@ $(document).ready(function() {
 function deleteOrganization() {
   //e.preventDefault()
   console.log("funkcja DELETE Ajax")
-  console.log("currentURL:" + currentUrl)
-  console.log("Numer elementu:"+ numberOfOrganization)
+  console.log("destinationURL:" + destinationURL)
+  console.log("Numer elementu:"+ number_of_organizacja)
   $.ajax({
-    url:  currentUrl,
+    url:  destinationURL,
     type: "DELETE",
     beforeSend: function(xhr) {
         xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
@@ -65,7 +76,6 @@ function deleteOrganization() {
   }).done(function(response) {
     console.log("udalo sie usunąć element")
     alert("Usunąłeś element organizacji!")
-    //window.location.replace("http://127.0.0.1:8000/front/organizacje/")
   }).fail(function() {
     alert("Wystąpił błąd w połączeniu z djangorestapi!")
   }).then(function() {

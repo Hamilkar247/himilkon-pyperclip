@@ -54,6 +54,11 @@
      <script src='{% static "inspinia/js/inspinia.js" %}' type="text/javascript"></script>
      <script src='{% static "inspinia/js/plugins/pace/pace.min.js" %}' type="text/javascript"></script>
      <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
+     <script>
+     {% block generate_revers_url %}
+       <!-- generate_revers_url - front/base.html -->
+     {% endblock generate_revers_url %}
+     </script>
    {% endblock scripts %}
    </main>
 </body>
