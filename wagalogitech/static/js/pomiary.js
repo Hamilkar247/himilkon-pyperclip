@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   console.log("pomiary ajax function")
   $.ajax({
-     url: "http://127.0.0.1:8000/api/v1/pomiary/",
+     url: revers_urls.api_v1_pomiary,
      type: "GET",
   }).done(function (response) {
       for(i=0; i<response.length; i++){
@@ -15,7 +15,7 @@ $(document).ready(function(){
               '<td>' + response[i].data_pomiaru + '</td>' +
               '<td>' + response[i].owner + '</td>' +
               '<td>' +
-                 '  <a href="/front/pomiary/' + response[i].id + '" class="btn btn-primary btn-sm">' + response[i].id + '</a>' +
+                 '  <a href="' + revers_urls.front_organizacje + response[i].id + '" class="btn btn-primary btn-sm">' + response[i].id + '</a>' +
               '</td>' +
            '</tr>');
       }

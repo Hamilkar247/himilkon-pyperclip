@@ -23,6 +23,14 @@
   </div>
 
 {% endblock authenticated %}
+{% block generate_revers_url %}
+  {{ block.super }}
+  <!--  generate_revers_url - pomiary.html-->
+  var revers_urls = {
+    api_v1_pomiary: "{% url 'api_v1:pomiar-list' %}",
+    front_organizacje:  "{% url 'front:organizacje' %}"
+  }
+{% endblock generate_revers_url %}
 {% block scripts %}
   {{ block.super }}
   <!-- scripts - pomiary.html -->
