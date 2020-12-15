@@ -22,7 +22,7 @@ $( document ).ready(function() {
    console.log("funkcja uzupelnianie organization_table")
    $('#organization_table').DataTable( {
         ajax: {
-         url:  "http://127.0.0.1:8000/api/v1/organizacje/",
+         url:  revers_urls.api_v1_organizacje,
          type: "GET",
          dataSrc: "",
         },
@@ -59,7 +59,7 @@ $( document ).ready(function() {
             { data: 'id',
               render: function (data, type, full, meta) {
                 numer = data
-                return '<a href="/front/organizacje/' + numer + '" class="btn btn-w-m btn-success"> Edytuj </a>';
+                return '<a href="'  + revers_urls.front_organizacje  + numer + '" class="btn btn-w-m btn-success"> Edytuj </a>';
               }
             },
         ]
