@@ -83,9 +83,9 @@ class SeriaPomiarowaViewSet(viewsets.ModelViewSet):
     @action(methods=['get'], detail=True, permission_classes=[
         permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly])
     def pomiary(self, request, pk):
-        ser_pom = SeriaPomiarowa.objects.get(id=pk)
-        pomiary = Pomiar.objects.get(seria_pomiarowa=ser_pom)
-        serializer = PomiarSerializer(pomiary)#, many=True)
+        ser_pom = SeriaPomiarowa.objects.get(pk=pk)
+        pomiary = Pomiar.objects.filter(seria_pomiarowa=ser_pom)
+        serializer = PomiarSerializer(pomiary, many=True)
         return Response(serializer.data)
 
 
