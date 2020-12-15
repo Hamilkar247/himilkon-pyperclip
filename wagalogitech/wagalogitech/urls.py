@@ -22,7 +22,6 @@ urlpatterns = [
     path('api/v1.2/', include('api_v1_2.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('front/', include('front.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('front.urls')),
     path('core/', include('core.urls')),
