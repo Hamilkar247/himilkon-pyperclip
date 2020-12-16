@@ -1,5 +1,5 @@
 #!/bin/bash
-REAL=$(dirname "$(realpath "$0")")
+REAL="$(dirname "$(realpath "$0")")"
 echo "$REAL"
 PATH="$REAL"/venv/bin:"$PATH"
 python "$REAL"/himilkon-pyperclip.py "$@"
