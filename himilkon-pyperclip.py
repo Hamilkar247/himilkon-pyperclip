@@ -16,7 +16,7 @@ def def_params():
         print("args:" + str(args))
     return args
 
-def gurlfunction():
+def gurlFunction():
     gurl=subprocess.Popen(['git', 'config', '--get', 'remote.origin.url'], stdout=subprocess.PIPE)
     output_gurl = gurl.stdout.read()
     print(output_gurl)
@@ -40,7 +40,7 @@ def djangoblockFunction(djangoblock):
 def main():
     args=def_params()
     if args.geturl:
-        gurlsfunction()
+        gurlFunction()
     elif args.djangoblock:
         djangoblock=args.djangoblock
         djangoblockFunction(djangoblock)
