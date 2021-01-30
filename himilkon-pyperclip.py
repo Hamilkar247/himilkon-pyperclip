@@ -10,7 +10,7 @@ def def_params():
     parser.add_argument("-l", "--loghami", action='store_true', help="set debug")
     args = parser.parse_args()
     if args.loghami:
-        logging.basicConfig(level=logging.DEBUG)
+        logging.basicConfig(level=logging.DEBUG, force=True)
         print("args:" + str(args))
     return args
 
